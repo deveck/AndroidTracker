@@ -15,7 +15,7 @@ Tschinkel Gerwald
 \today{}}
 \maketitle
 
-\newpage
+%\newpage
 
 \section{Teilnehmer}
 \begin{tabular}{|ccc|}
@@ -27,6 +27,53 @@ Reiter Andreas & 0530152 & andreas.reiter@student.tugraz.at \\
 Tschinkel Gerwald & 0612771 & gerwald.tschinkel@student.tugraz.at \\
 \hline
 \end{tabular}
+
+\section{Thema}
+\begin{center}
+\Large{\textbf{Android GPS Tracking Applikation}}
+\end{center}
+
+\section{Beschreibung}
+Es wird eine Android Applikation erstellt, welche dem Benutzer ermöglicht seine
+aktuelle Position (ermittelt über GPS / Mobilfunk Peilung) zu ermitteln und diese
+via Webservice an ein schon bestehendes Internet Portal (www.crossingways.com) zu
+senden, um es dort mit Freunden zu teilen. \\
+
+\underline{In der Android Oberfläche gibt es folgende Möglichkeiten:}
+\begin{itemize}
+\item Beim erstmaligen Start wird nach Benutzernme/Passwort gefragt
+\item Start / Stop des Life Trackings
+\item Anzeige diverser Daten wie: GPS Position, Geschwindigkeit, Stoppuhr, ...
+\end{itemize}
+
+\underline{optional:}
+\begin{itemize}
+\item Einmaliges Senden der aktuellen Position.
+\item Senden der Position via SMS (für Auslandsaufenthalte)
+\item Abspeichern einer Reihe von Positionen als Track - z.B.: Radfahrtrip, autotrip, Wandern, Reise, ...
+\item Photo Button (Macht direkt aus der Anwendung heraus Fotos - somit ist eine Geocodierung möglich)
+\item Bearbeiten (Name, etc...) und Upload eines Tracks inklussive aller  wärend der Zeit gemachten Fotos auf das Portal www.crossingways.com
+\end{itemize}
+
+\section{Grobes Design}
+Aufbauend auf einem bereits verfügbaren Tracking Clients für Windows Mobile wird ein ähnlicher client für
+Google Android implementiert. Dazu wird ein UserInterface am Android benötigt. Die Serverseitige Implementierung
+besteht bereits. Tracking Daten werden von der Applikation erstellt. Dies geschieht durch Positionsbestimmung über
+das vorhandene GPS-Modul, bzw. über Mobilfunk Peilung. Die aktuellen Positionsdaten werden von der Applikation laufend
+bestimmt und mitgespeichert (im Tracking Modus). Die aktuell gültige Position wird dem Benutzer am graphischen Interface
+angezeigt. Der Tracking Modus ist optional und kann jederzeit gestartet und beendet werden. Aufgezeichnete Daten können auch
+jederzeit angezeigt werden. Für die aktuelle Position können Photos hinterlegt werden, diese werden in die Datenstruktur
+eingebunden. Zusätzlich wird noch eine Stopuhr Funktion und eine Geschwindigkeitsmessung implementiert. Aufgezeichnete
+Daten können jederzeit an den TrackingServer (www.crossingways.com) gesendet werden. Dies geschieht entweder über eine
+bestehende mobile Internetverbindung, oder optional per SMS-Versand.\\
+Die Applikation setzt sich aus folgenden Teilen (Modulen) zusammen:
+\begin{itemize}
+ \item UserInterface: Anzeigen aktueller Daten, Tracking, Steuerung, Aufnahme von Photos, Initialiseren des Übermittelns
+an den Server
+ \item Interface zu GPS-Modul: Zuständig für die Bestimmung der akutellen Position
+ \item lll
+\end{itemize}
+
 
 
 \end{document}

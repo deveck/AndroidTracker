@@ -1,0 +1,40 @@
+MMIS - Konstruktionsübung  Projektplan 
+
+Neubauer Georg,
+Reiter Andreas,
+Tschinkel Gerwald,
+
+
+WS 2009, 
+
+
+
+Teilnehmer
+
+Name            	& Matrikelnummer & e-Mail 
+Neubauer Georg		& 0530228 	& georg.neubauer@student.tugraz.at
+Reiter Andreas		& 0530152	& andreas.reiter@student.tugraz.at
+Tschinkel Gerwald	& 0612771	& gerwald.tschinkel@student.tugraz.at
+
+
+
+Thema
+Android GPS Tracking Applikation
+
+
+Beschreibung
+
+Es wird eine Android Applikation erstellt, welche dem Benutzer ermöglicht seine aktuelle Position (ermittelt über GPS / Mobilfunk Peilung) zu ermitteln und diese via Webservice an ein schon bestehendes Internet Portal (www.crossingways.com) zu senden, um es dort mit Freunden zu teilen
+
+In der Android Oberfläche gibt es folgende Möglichkeiten:
+.) Beim erstmaligen Start wird nach Benutzernme/Passwort gefragt
+.) Start / Stop des Life Trackings
+.) Anzeige diverser Daten wie: GPS Position, Geschwindigkeit, Stoppuhr, ...
+
+optional:
+----
+.) Einmaliges Senden der aktuellen Position.
+.) Senden der Position via SMS (für Auslandsaufenthalte)
+.) Abspeichern einer Reihe von Positionen als Track - z.B.: Radfahrtrip, autotrip, Wandern, Reise, ...
+.) Photo Button (Macht direkt aus der Anwendung heraus Fotos - somit ist eine Geocodierung möglich)
+.) Bearbeiten (Name, etc...) und Upload eines Tracks inklussive aller  wärend der Zeit gemachten Fotos auf das Portal www.crossingways.com

@@ -52,7 +52,7 @@ senden, um es dort mit Freunden zu teilen. \\
 \item Senden der Position via SMS (für Auslandsaufenthalte)
 \item Abspeichern einer Reihe von Positionen als Track - z.B.: Radfahrtrip, autotrip, Wandern, Reise, ...
 \item Photo Button (Macht direkt aus der Anwendung heraus Fotos - somit ist eine Geocodierung möglich)
-\item Bearbeiten (Name, etc...) und Upload eines Tracks inklussive aller  wärend der Zeit gemachten Fotos auf das Portal www.crossingways.com
+\item Bearbeiten (Name, etc...) und Upload eines Tracks inklussive aller  während der Zeit gemachten Fotos auf das Portal www.crossingways.com
 \end{itemize}
 
 \section{Grobes Design}
@@ -71,9 +71,34 @@ Die Applikation setzt sich aus folgenden Teilen (Modulen) zusammen:
  \item UserInterface: Anzeigen aktueller Daten, Tracking, Steuerung, Aufnahme von Photos, Initialiseren des Übermittelns
 an den Server
  \item Interface zu GPS-Modul: Zuständig für die Bestimmung der akutellen Position
- \item lll
+ \item Datenbankstruktur: zum Speichern des Trackings (Position, Zeit, aktuelle Geschwindigkeit und Photos der Position)
+ \item Kamerasteuerung: Aufnehmen aktueller Photos
+ \item Kommunikation: Senden der Daten an den Server
+ \item sonstige Module: dieser werden erst nach der Erstellung der UseCases definiert
 \end{itemize}
+Die Applikation wird am Google Android unter den Programmiersprachen C/C++ sowie JAVA und diverser Skriptsprachen
+implementiert. Als Unterstützung für Entwickler stellt Google eine Android SDK zu Verfügung.
 
+\section{Zeitplan (abschätzung)}
+\begin{tabular}{lr}
+ Aufgabe & Dauer \\
+ UseCase erstellen und Dokumentation & 16h \\
+ Einlesen und Einarbeiten in die SDK & 24h \\
+ Installation und Konfiguration des Frameworks & 5h \\
+ Datenbankdesign & 4h \\
+ Frontend zur Datenerfassung & 12h \\
+ Erstellen einer ersten Version des UIs & 8h \\
+ Erweitern des UIs & 10h \\
+ Interface zur Positionserfassung & 10h \\
+ Interface zur Bilderstellung und einpflegen in die DB & 10h \\
+ Interface zur Kommunikation & 10h \\
+ Implementierung der Kommunikationsprotokolle & 12h \\
+ UseCase Validierung & 4h \\
+ Erstellen von Testfällen & 5h \\
+ Testen & 6h \\
+ \hline
+ gesamt: & 136h
+\end{tabular}
 
 
 \end{document}

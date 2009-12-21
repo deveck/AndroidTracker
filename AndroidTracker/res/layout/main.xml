@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content"
+                android:padding="10px"
+                android:orientation="vertical"
+                 >
+                 
+    <LinearLayout 
+   				android:layout_width="fill_parent"
+   				android:layout_height="wrap_content"
+   				>
+    <TextView android:id="@+id/labelUsername" 
+              android:layout_width="wrap_content" 
+              android:layout_height="wrap_content" 
+              android:text="@string/username" />
+
+    <EditText android:id="@+id/textUsername" 
+              android:layout_width="fill_parent" 
+              android:layout_height="wrap_content" 
+              android:background="@android:drawable/editbox_background"
+    />
+    </LinearLayout>
+
+    <LinearLayout 
+   				android:layout_width="fill_parent"
+   				android:layout_height="wrap_content"
+   				>
+    <TextView android:id="@+id/labelPassword" 
+              android:layout_width="wrap_content" 
+              android:layout_height="wrap_content" 
+              android:text="@string/password" />
+
+    <EditText android:id="@+id/textPassword" 
+              android:layout_width="fill_parent" 
+              android:layout_height="wrap_content" 
+              android:background="@android:drawable/editbox_background"
+    		  android:inputType="textPassword"/>
+    </LinearLayout>
+      
+  
+  	<RelativeLayout 
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  	> 		
+  			
+    <Button android:id="@+id/buttonOk" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_alignParentRight="true"
+            android:text="@string/doSOAPCall" 
+			/>
+            
+    </RelativeLayout>
+</LinearLayout>

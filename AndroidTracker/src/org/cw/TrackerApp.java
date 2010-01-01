@@ -1,14 +1,15 @@
 package org.cw;
 
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.transport.HttpTransportSE;
 
+import org.cw.connection.CrossingWaysConnection;
+import org.cw.utils.AlertBuilder;
 import android.app.Activity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+
 
 /**
  * Represents the main application view.
@@ -18,31 +19,35 @@ import android.widget.Button;
  *
  */
 public class TrackerApp extends Activity {
-    
-	private OnClickListener _onDoSOAPCallClick = new OnClickListener(){
-		@Override
-		public void onClick(View v) {
-			HttpTransportSE transport = new HttpTransportSE("http://www.crossingways.com/services/livetracking.asmx");
-			
-			SoapObject verifyCredentials = new  SoapObject("http://www.crossingways.com/", "VerifyCredentials");
-			verifyCredentials.addProperty("username", "test");
-			verifyCredentials.addProperty("password", "pw_hash");
-			
-			//For some reason hard coded control-string....strange
-			verifyCredentials.addProperty("control", "CWRocks2008");
-			
-			
-			
-		}
-	};
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AlertBuilder.CreateInstance(this);
         setContentView(R.layout.main);
+
         
         Button callSoap = (Button)findViewById(R.id.buttonOk);
-        callSoap.setOnClickListener(_onDoSOAPCallClick);
+        callSoap.setOnClickListener(new OnClickListener()
+        	{
+	    		@Override
+	    		public void onClick(View v) {
+	    			try
+	    			{
+	    				if(CrossingWaysConnection.Instance().VerifyCredentials(
+	    						((EditText)findViewById(R.id.textUsername)).getText().toString(),
+	    						((EditText)findViewById(R.id.textPassword)).getText().toString()))
+	    					AlertBuilder.Instance().ShowInfoBox("Credential check successful", "", "OK");
+	    				else
+	    					AlertBuilder.Instance().ShowInfoBox("Credential check FAILED", "", "OK");
+	    			}
+	    			catch(CWException e)
+	    			{
+	    				e.ShowAlertDialog();
+	    			}
+	    		}
+        	}
+        );
     }
 }

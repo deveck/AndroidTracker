@@ -5,22 +5,9 @@ import android.content.Context;
 
 public class AlertBuilder 
 {
-	private static AlertBuilder _instance = null;
-	
-	
-	public static final AlertBuilder Instance()
-	{
-		return _instance;
-	}
-	
-	public static final void CreateInstance(Context ctx)
-	{
-		_instance = new AlertBuilder(ctx);
-	}
-	
 	private Context _ctx;
 	
-	private AlertBuilder(Context ctx)
+	public AlertBuilder(Context ctx)
 	{		
 		_ctx = ctx;
 	}

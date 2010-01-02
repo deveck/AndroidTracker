@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 import org.cw.CWException;
+import org.cw.UserCredentials;
 import org.cw.connection.marshals.MarshalBoolean;
 import org.cw.utils.HashUtils;
 import org.ksoap2.SoapEnvelope;
@@ -123,15 +124,15 @@ public class CrossingWaysConnection
 	 * @throws XmlPullParserException 
 	 * @throws IOException 
 	 */
-	public boolean VerifyCredentials(String username, String password)
+	public boolean VerifyCredentials(UserCredentials credentials)
 		throws CWException
 	{
 		Boolean verified;
 		try {
 			verified = SoapPrimitiveToBoolean((SoapPrimitive) PerformSOAPCall("VerifyCredentials", 
 					new PropertyInfo[]{
-						CreatePrimitivePropertyInfo("username", username),
-						CreatePrimitivePropertyInfo("passwordhash", HashUtils.HashPassword(password)),
+						CreatePrimitivePropertyInfo("username", credentials.getUsername()),
+						CreatePrimitivePropertyInfo("passwordhash", HashUtils.HashPassword(credentials.getPassword())),
 						CreatePrimitivePropertyInfo("control", "CWRocks2008")
 					}, null
 					/*new IEnvelopeSetupCallback(){
@@ -147,5 +148,10 @@ public class CrossingWaysConnection
 			e.printStackTrace();
 			throw new CWException(e.getMessage());
 		}
+	}
+	
+	public void UpdateCurrentPosition()
+	{
+		
 	}
 }

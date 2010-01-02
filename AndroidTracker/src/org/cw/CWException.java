@@ -16,7 +16,7 @@ public class CWException extends Exception
 	
 	public void ShowAlertDialog()
 	{
-		AlertBuilder.Instance().ShowInfoBox("Error: " + getMessage(), "Error", "OK");
+		Environment.Instance().AlertBuilderInstance().ShowInfoBox("Error: " + getMessage(), "Error", "OK");
 	}
 	
 }

@@ -5,3 +5,4 @@
 *.*~
 bin
 .hg
+.hgignore

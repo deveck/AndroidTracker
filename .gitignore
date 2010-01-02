@@ -4,4 +4,4 @@
 *.backup
 *.*~
 bin
-
+.hg

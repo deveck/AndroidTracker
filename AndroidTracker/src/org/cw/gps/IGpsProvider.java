@@ -12,3 +12,5 @@ public interface IGpsProvider
 	
 	void AddGpsStatusReceiver(IGpsStatusReceiver statusReceiver);
 }
+
+

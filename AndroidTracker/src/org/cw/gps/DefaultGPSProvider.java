@@ -34,6 +34,7 @@ public class DefaultGPSProvider implements IGpsProvider, IGpsRecorder
 		_ctx = ctx;
 		
 		_locman = (LocationManager)_ctx.getSystemService(Context.LOCATION_SERVICE);
+		
 		_locationListener = new MyLocationManager(this);
 		_locman.requestLocationUpdates(
 				LocationManager.GPS_PROVIDER,
@@ -58,7 +59,10 @@ public class DefaultGPSProvider implements IGpsProvider, IGpsRecorder
 	
 	@Override
 	public void AddLocation(LocationIdentifier newLocation) 
-	{
+	{		
+		if(_gpsPoints.size() > 0)
+			newLocation.CalculateSpeed(_gpsPoints.get(_gpsPoints.size() - 1));
+		
 		_gpsPoints.add(newLocation);
 		
 		for(IGpsStatusReceiver recv : _statusReceivers)

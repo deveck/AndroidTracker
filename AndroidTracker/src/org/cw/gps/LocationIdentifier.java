@@ -13,17 +13,18 @@ import android.location.Location;
 public class LocationIdentifier 
 {
 	private Location _location;
-	private Date _dateTime;
 	private float _speed;
 	private double _height;
+	private Date _dateTime;
 	
 	public LocationIdentifier(Location location)
 	{
-		_dateTime = new Date();
 		_location = location;
 		
 		//To be tested
 		_height = location.getAltitude();
+		
+		_dateTime = new Date(location.getTime()); 
 	}
 
 	public void CalculateSpeed(LocationIdentifier previousLocation)
@@ -32,7 +33,7 @@ public class LocationIdentifier
 			_speed = _location.getSpeed();
 		else
 		{
-			double diff = (double)(_dateTime.getTime() - previousLocation.getDateTime().getTime());
+			double diff = (double)(getDateTime().getTime() - previousLocation.getDateTime().getTime());
 			double distance = _location.distanceTo(previousLocation.getLocation());
 			_speed = (float) (distance/diff * 3600.0) ;
 		}

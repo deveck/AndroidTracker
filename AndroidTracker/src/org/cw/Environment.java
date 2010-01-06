@@ -3,6 +3,7 @@ package org.cw;
 import org.cw.connection.CrossingWaysConnection;
 import org.cw.gps.DefaultGPSProvider;
 import org.cw.gps.IGpsProvider;
+import org.cw.settings.SettingsEnvironment;
 import org.cw.utils.AlertBuilder;
 
 import android.content.Context;
@@ -38,7 +39,10 @@ public class Environment
 	public CrossingWaysConnection ConnectionInstance()
 	{
 		if(_connectionInstance == null)
+		{
 			_connectionInstance = new CrossingWaysConnection();
+			_connectionInstance.execute();
+		}
 		
 		return _connectionInstance;
 	}
@@ -52,4 +56,9 @@ public class Environment
 		return _gpsProvider;
 	}
 	
+	private SettingsEnvironment _settings = null;
+	public void CreateSettings(Context ctx){
+		_settings = new SettingsEnvironment(ctx);
+	}
+	public SettingsEnvironment Settings(){return _settings;}
 }

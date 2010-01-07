@@ -1,6 +1,7 @@
 package org.cw;
 
 import org.cw.gps.IGpsStatusReceiver;
+import org.cw.gps.LiveTrackingUpdater;
 import org.cw.gps.LocationIdentifier;
 import android.app.Activity;
 import android.location.Location;
@@ -30,9 +31,13 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
         Environment.Instance().CreateAlertBuilderInstance(this);
         Environment.Instance().CreateDefaultGPSProvider(this);
         Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(this);
+        Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(new LiveTrackingUpdater());
         
         setContentView(R.layout.main);
         
+        
+        Environment.Instance().Settings().setLiveTrackerEnabled(true);
+        Environment.Instance().Settings().setLiveTrackerCommitInterval(0);
         
         ((EditText)findViewById(R.id.textUsername)).setText(Environment.Instance().Settings().getUsername(""));
         ((EditText)findViewById(R.id.textPassword)).setText(Environment.Instance().Settings().getPassword(""));
@@ -58,7 +63,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 	    				else
 	    					Environment.Instance().AlertBuilderInstance().ShowInfoBox("Credential check FAILED", "", "OK");
 	    				
-	    				String username = ((EditText)findViewById(R.id.textUsername)).getText().toString();
+	    				/*String username = ((EditText)findViewById(R.id.textUsername)).getText().toString();
 	    				String password = ((EditText)findViewById(R.id.textPassword)).getText().toString();
 	    				
 	    				
@@ -72,6 +77,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 	    					Environment.Instance().ConnectionInstance().PostCurrentPositionRequest(username, password, 
 		    						new LocationIdentifier(loc));
 	    				}
+	    				*/
 	    				
 	    				
 	    			}

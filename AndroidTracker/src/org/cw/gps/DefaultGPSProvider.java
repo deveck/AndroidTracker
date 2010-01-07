@@ -14,7 +14,7 @@ import android.os.Bundle;
  * @author Andreas Reiter <andreas.reiter@student.tugraz.at>
  *
  */
-public class DefaultGPSProvider implements IGpsProvider, IGpsRecorder
+public class DefaultGPSProvider implements ILocationProvider, IGpsRecorder
 {	
 	private Context _ctx;
 

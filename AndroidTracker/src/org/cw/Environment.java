@@ -2,10 +2,10 @@ package org.cw;
 
 import org.cw.connection.CrossingWaysConnection;
 import org.cw.gps.DefaultGPSProvider;
-import org.cw.gps.IGpsProvider;
+import org.cw.gps.ILocationProvider;
 import org.cw.settings.SettingsEnvironment;
 import org.cw.utils.AlertBuilder;
-import org.cw.utils.StatisticItem;
+//import org.cw.utils.StatisticItem;
 
 import android.content.Context;
 
@@ -48,12 +48,12 @@ public class Environment
 		return _connectionInstance;
 	}
 	
-	private IGpsProvider _gpsProvider = null;
+	private ILocationProvider _gpsProvider = null;
 	public  void CreateDefaultGPSProvider(Context ctx){
 		_gpsProvider = new DefaultGPSProvider(ctx);
 		
 	}
-	public IGpsProvider GPSProviderInstance(){
+	public ILocationProvider GPSProviderInstance(){
 		return _gpsProvider;
 	}
 	

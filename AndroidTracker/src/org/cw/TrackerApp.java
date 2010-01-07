@@ -1,11 +1,7 @@
 package org.cw;
 
-
-import org.cw.connection.CrossingWaysConnection;
-import org.cw.gps.DefaultGPSProvider;
 import org.cw.gps.IGpsStatusReceiver;
 import org.cw.gps.LocationIdentifier;
-import org.cw.utils.AlertBuilder;
 import android.app.Activity;
 import android.location.Location;
 import android.os.Bundle;
@@ -37,6 +33,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
         
         setContentView(R.layout.main);
         
+        
         ((EditText)findViewById(R.id.textUsername)).setText(Environment.Instance().Settings().getUsername(""));
         ((EditText)findViewById(R.id.textPassword)).setText(Environment.Instance().Settings().getPassword(""));
         
@@ -65,7 +62,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 	    				String password = ((EditText)findViewById(R.id.textPassword)).getText().toString();
 	    				
 	    				
-	    				/** Test Test, just send some coordinates */
+	    				// Test Test, just send some coordinates 
 	    				for(int i = 0; i<3; i++)
 	    				{
 	    					Location loc = new Location("gps");
@@ -84,7 +81,9 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 	    			}
 	    		}
         	}
+        	
         );
+        
         
     }
 

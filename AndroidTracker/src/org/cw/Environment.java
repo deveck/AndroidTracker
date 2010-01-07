@@ -5,6 +5,7 @@ import org.cw.gps.DefaultGPSProvider;
 import org.cw.gps.IGpsProvider;
 import org.cw.settings.SettingsEnvironment;
 import org.cw.utils.AlertBuilder;
+import org.cw.utils.StatisticItem;
 
 import android.content.Context;
 
@@ -61,4 +62,6 @@ public class Environment
 		_settings = new SettingsEnvironment(ctx);
 	}
 	public SettingsEnvironment Settings(){return _settings;}
+	
+	
 }

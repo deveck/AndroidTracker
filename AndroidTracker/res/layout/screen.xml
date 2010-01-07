@@ -1,1 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+android:id="@+id/widget37"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical"
+xmlns:android="http://schemas.android.com/apk/res/android"
+>
+<RelativeLayout
+android:id="@+id/widget33"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+>
+<DigitalClock
+android:id="@+id/widget43"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="2:14 PM"
+android:layout_alignParentBottom="true"
+android:layout_alignParentRight="true"
+>
+</DigitalClock>
+<TextView
+android:id="@+id/widget35"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Android Tracker Application"
+android:textSize="16sp"
+android:typeface="monospace"
+android:textStyle="bold"
+android:layout_alignParentTop="true"
+android:layout_centerHorizontal="true"
+>
+</TextView>
+</RelativeLayout>
+<RelativeLayout
+android:id="@+id/widget41"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+>
+</RelativeLayout>
+</LinearLayout>

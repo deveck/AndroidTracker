@@ -1,42 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-android:id="@+id/widget37"
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-android:orientation="vertical"
-xmlns:android="http://schemas.android.com/apk/res/android"
->
-<RelativeLayout
-android:id="@+id/widget33"
-android:layout_width="fill_parent"
-android:layout_height="wrap_content"
->
-<DigitalClock
-android:id="@+id/widget43"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="2:14 PM"
-android:layout_alignParentBottom="true"
-android:layout_alignParentRight="true"
->
-</DigitalClock>
-<TextView
-android:id="@+id/widget35"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Android Tracker Application"
-android:textSize="16sp"
-android:typeface="monospace"
-android:textStyle="bold"
-android:layout_alignParentTop="true"
-android:layout_centerHorizontal="true"
->
-</TextView>
-</RelativeLayout>
-<RelativeLayout
-android:id="@+id/widget41"
-android:layout_width="fill_parent"
-android:layout_height="wrap_content"
->
-</RelativeLayout>
+
+<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"><TextView android:text="Tourname" android:id="@+id/TextView01" android:layout_height="wrap_content" android:gravity="center_horizontal|center_vertical" android:layout_width="fill_parent"></TextView>
+
+
+
+<LinearLayout android:id="@+id/LinearLayout02" android:layout_height="wrap_content" android:layout_width="fill_parent"><TextView android:id="@+id/TextView12" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="Livetracking:"></TextView><ToggleButton android:text="@+id/ToggleButton01" android:id="@+id/ToggleButton01" android:layout_width="wrap_content" android:layout_height="fill_parent" android:textOff="Start" android:textOn="Stop" android:layout_gravity="center" android:layout_marginLeft="15dip"></ToggleButton><Button android:id="@+id/Button01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pause" android:layout_gravity="center" android:layout_marginLeft="15dip"></Button><ProgressBar android:id="@+id/ProgressBar01" android:layout_toLeftOf="@+id/DigitalClock01" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="center" android:layout_marginLeft="15dip"></ProgressBar><DigitalClock android:text="@+id/DigitalClock01" android:id="@+id/DigitalClock01" android:gravity="center_vertical|right" android:layout_height="wrap_content" android:layout_gravity="center|right" android:layout_width="fill_parent"></DigitalClock>
+</LinearLayout>
+
+
+
+<TableLayout android:id="@+id/TableLayout01" android:layout_height="wrap_content" android:layout_width="fill_parent" android:stretchColumns="1"><TableRow android:id="@+id/TableRow01" android:layout_height="wrap_content" android:layout_width="wrap_content"><TextView android:id="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="3dip" android:text="Longitude"></TextView><TextView android:text="@+id/TextView03" android:id="@+id/TextView03" android:layout_height="wrap_content" android:padding="3dip" android:layout_width="wrap_content" android:layout_gravity="right"></TextView></TableRow><TableRow android:id="@+id/TableRow02" android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:id="@+id/TextView04" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Latitude" android:padding="3dip"></TextView><TextView android:text="@+id/TextView05" android:id="@+id/TextView05" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right" android:padding="3dip"></TextView></TableRow>
+<TableRow android:id="@+id/TableRow03" android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:id="@+id/TextView06" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Altitude" android:padding="3dip"></TextView><TextView android:text="@+id/TextView07" android:id="@+id/TextView07" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right" android:padding="3dip"></TextView></TableRow><TableRow android:id="@+id/TableRow04" android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:id="@+id/TextView10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="3dip" android:text="Distance"></TextView>
+<TextView android:text="@+id/TextView11" android:id="@+id/TextView11" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right" android:padding="3dip"></TextView>
+</TableRow><TableRow android:id="@+id/TableRow05" android:layout_width="wrap_content" android:layout_height="wrap_content"><TextView android:id="@+id/TextView08" android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="3dip" android:text="Average Speed"></TextView><TextView android:text="@+id/TextView09" android:id="@+id/TextView09" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right" android:padding="3dip"></TextView></TableRow></TableLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<LinearLayout android:id="@+id/LinearLayout03" android:layout_height="wrap_content" android:layout_width="fill_parent"><Button android:id="@+id/Button02" android:layout_height="wrap_content" android:text="Settings" android:layout_width="fill_parent"></Button></LinearLayout>
+
 </LinearLayout>

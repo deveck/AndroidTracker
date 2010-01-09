@@ -10,4 +10,13 @@
     <string name="commit_interval">Live tracking commit interval(sec):</string>
     <string name="CredentialsVerified">Credentials have been verified successfull</string>
     <string name="CredentialsNotVerified">Credentials have not been verified, they will not be saved. Click on the cross to verify</string>
+    <string name="duration">Duration</string>
+    <string name="speed">Speed</string>
+    <string name="distance">Distance</string>
+    <string name="livetracking">Live tracking</string>
+    <string name="livetracking_on">On</string>
+    <string name="livetracking_off">Off</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="altitude">Altitude</string>
 </resources>

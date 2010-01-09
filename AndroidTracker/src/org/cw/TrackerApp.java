@@ -36,7 +36,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
         
         setContentView(R.layout.screen);
         
-        ((Button)findViewById(R.id.SettingsButton)).setOnClickListener(new OnClickListener() {
+        ((Button)findViewById(R.id.buttonSettings)).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				ButtonSettings_Clicked();

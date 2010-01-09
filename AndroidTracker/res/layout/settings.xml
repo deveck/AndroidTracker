@@ -100,11 +100,16 @@
 
 	</TableLayout>      
   
-  	<LinearLayout
+  	<TableLayout
   			android:layout_width="fill_parent"
   			android:layout_height="fill_parent"
-  			android:gravity="bottom"
+  			android:gravity="top"
   			> 		
+  			
+  		<TableRow 
+  			android:minHeight="30px"
+  			/>
+  	
   			
     <Button android:id="@+id/buttonOk" 
             android:layout_width="fill_parent" 
@@ -114,7 +119,7 @@
             
           
     
-    </LinearLayout>
+    </TableLayout>
     
 
 </LinearLayout>

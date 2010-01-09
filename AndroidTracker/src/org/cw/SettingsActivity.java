@@ -35,7 +35,7 @@ public class SettingsActivity extends Activity
 		// Load settings
 		_textUsername.setText(Environment.Instance().Settings().getUsername(""));
         _textPassword.setText(Environment.Instance().Settings().getPassword(""));      
-        _textCommitInterval.setText(Environment.Instance().Settings().getLiveTrackerCommitInterval().toString());
+        _textCommitInterval.setText(new Integer((Environment.Instance().Settings().getLiveTrackerCommitInterval()/1000)).toString());
         
         this.SetVerifiedState(true);
         
@@ -97,7 +97,7 @@ public class SettingsActivity extends Activity
 		}
 		try
 		{
-			Integer commitInterval = Integer.parseInt(_textCommitInterval.getText().toString());
+			Integer commitInterval = Integer.parseInt(_textCommitInterval.getText().toString()) * 1000;
 			Environment.Instance().Settings().setLiveTrackerCommitInterval(commitInterval);
 		}
 		catch(NumberFormatException e)

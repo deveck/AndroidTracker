@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent" 
+                android:layout_height="fill_parent"
+                android:padding="10px"
+                android:orientation="vertical"
+                
+                 >
+                 
+    <TableLayout
+   				android:layout_width="fill_parent"
+   				android:layout_height="wrap_content"
+   				android:stretchColumns="1"
+   				>
+   				
+   		<TableRow>
+   	
+		    <TextView android:id="@+id/labelUsername"
+		              android:layout_width="wrap_content" 
+		              android:layout_height="wrap_content" 
+		              android:text="@string/username"
+		              android:textStyle="bold"
+		               />
+		
+		    <EditText android:id="@+id/textUsername" 
+		              android:layout_width="fill_parent" 
+		              android:layout_height="wrap_content" 
+		              android:background="@android:drawable/editbox_background"
+		              android:width="200px"
+		    />
+		    
+    	</TableRow>
+
+		<TableRow>
+    		
+		    <TextView android:id="@+id/labelPassword" 
+		              android:layout_width="fill_parent" 
+		              android:layout_height="wrap_content" 
+		              android:text="@string/password"
+		              android:textStyle="bold" />
+		
+		    <EditText android:id="@+id/textPassword"
+		              android:layout_width="fill_parent" 
+		              android:layout_height="wrap_content" 
+		              android:background="@android:drawable/editbox_background"
+		    		  android:inputType="textPassword"
+		    		  android:width="200px"
+		    		  />
+		 </TableRow>
+		 
+		
+		<LinearLayout 
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				>
+		
+		 <ImageButton
+		 		android:id="@+id/buttonVerifyCredentials"
+		 		android:src="@drawable/cross"
+		 		android:layout_width="wrap_content"
+		 		android:layout_height="wrap_content"
+		 		android:background="@android:drawable/btn_default_small"
+		 	/>
+		 <TextView
+		 		android:id="@+id/labelVerifyCredentials"
+		 		android:layout_width="fill_parent"
+		 		android:layout_height="fill_parent"
+		 		android:text="@string/CredentialsNotVerified" />		 		
+		 
+		 </LinearLayout>
+		 
+		 <!--  Seperator -->
+		 <TableRow android:minHeight="5px" />
+		 <TableRow	android:minHeight="5px"
+		 	android:background="@color/gray" />
+		 <TableRow android:minHeight="5px" />
+		 <!--  Seperator end -->
+
+	
+	<LinearLayout android:orientation="horizontal">
+
+		 	<TextView android:id="@+id/labelCommitInterval"
+		 			  android:layout_width="wrap_content"
+		 			  android:layout_height="wrap_content"
+		 			  android:text="@string/commit_interval"
+		 			  android:textStyle="bold">
+		 	</TextView>
+		 	
+		 	<EditText android:id="@+id/textCommitInterval"
+		 			  android:layout_width="fill_parent"
+		 			  android:layout_height="wrap_content"
+		 			  android:background="@android:drawable/editbox_background"
+		 			  android:inputType="number"
+		 			  android:height="5px"
+		 			  >
+		 	
+		 	</EditText>
+    </LinearLayout>
+
+	</TableLayout>      
+  
+  	<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="fill_parent"
+  			android:gravity="bottom"
+  			> 		
+  			
+    <Button android:id="@+id/buttonOk" 
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content" 
+            android:text="@string/Save" 
+			/>
+            
+          
+    
+    </LinearLayout>
+    
+
+</LinearLayout>

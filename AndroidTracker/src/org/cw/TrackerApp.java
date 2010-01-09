@@ -4,6 +4,7 @@ import org.cw.gps.IGpsStatusReceiver;
 import org.cw.gps.LiveTrackingUpdater;
 import org.cw.gps.LocationIdentifier;
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
@@ -33,65 +34,21 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
         Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(this);
         Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(new LiveTrackingUpdater());
         
-        setContentView(R.layout.main);
+        setContentView(R.layout.screen);
         
-        
-        Environment.Instance().Settings().setLiveTrackerEnabled(true);
-        Environment.Instance().Settings().setLiveTrackerCommitInterval(0);
-        
-        ((EditText)findViewById(R.id.textUsername)).setText(Environment.Instance().Settings().getUsername(""));
-        ((EditText)findViewById(R.id.textPassword)).setText(Environment.Instance().Settings().getPassword(""));
-        
-        Button callSoap = (Button)findViewById(R.id.buttonOk);
-        callSoap.setOnClickListener(new OnClickListener()
-        	{
-	    		@Override
-	    		public void onClick(View v) {
-	    			try
-	    			{
-	    				if(Environment.Instance().ConnectionInstance().VerifyCredentials(
-	    						new UserCredentials(
-	    							((EditText)findViewById(R.id.textUsername)).getText().toString(),
-	    							((EditText)findViewById(R.id.textPassword)).getText().toString())
-	    						)
-	    					)
-	    				{
-	    					Environment.Instance().AlertBuilderInstance().ShowInfoBox("Credential check successful", "", "OK");
-	    					Environment.Instance().Settings().setUsername(((EditText)findViewById(R.id.textUsername)).getText().toString());
-	    					Environment.Instance().Settings().setPassword(((EditText)findViewById(R.id.textPassword)).getText().toString());
-	    				}
-	    				else
-	    					Environment.Instance().AlertBuilderInstance().ShowInfoBox("Credential check FAILED", "", "OK");
-	    				
-	    				/*String username = ((EditText)findViewById(R.id.textUsername)).getText().toString();
-	    				String password = ((EditText)findViewById(R.id.textPassword)).getText().toString();
-	    				
-	    				
-	    				// Test Test, just send some coordinates 
-	    				for(int i = 0; i<3; i++)
-	    				{
-	    					Location loc = new Location("gps");
-		    				loc.setAltitude(1);
-		    				loc.setLatitude(2);
-	    					loc.setLongitude(i);
-	    					Environment.Instance().ConnectionInstance().PostCurrentPositionRequest(username, password, 
-		    						new LocationIdentifier(loc));
-	    				}
-	    				*/
-	    				
-	    				
-	    			}
-	    			catch(CWException e)
-	    			{
-	    				e.ShowAlertDialog();
-	    			}
-	    		}
-        	}
-        	
-        );
-        
-        
+        ((Button)findViewById(R.id.SettingsButton)).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ButtonSettings_Clicked();
+			}
+		});
     }
+        
+    private void ButtonSettings_Clicked()
+    {
+    	startActivity(new Intent(this, SettingsActivity.class));
+    }
+        
 
 	@Override
 	public void LocationChanged(LocationIdentifier newLocation) {

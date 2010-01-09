@@ -1,12 +1,23 @@
 package org.cw.connection;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Stack;
 import java.util.Vector;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.cw.CWException;
+import org.cw.CWWithCallbackInfoException;
 import org.cw.Environment;
 import org.cw.UserCredentials;
 import org.cw.connection.marshals.MarshalAlt;
@@ -29,8 +40,13 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.AsyncTask;
 
-
-public class CrossingWaysConnection extends AsyncTask<Void, AsyncTaskProgressInfo, Void>
+/**
+ * Manages the connection to the crossingways webservice
+ * 
+ * @author Andreas Reiter <andreas.reiter@student.tugraz.at>
+ *
+ */
+public class CrossingWaysConnection extends AsyncTask<Void, CallbackInfo, Void>
 {
 	/**
 	 * _baseUrl + "ServiceName" e.g. VerifyCredentials
@@ -47,6 +63,9 @@ public class CrossingWaysConnection extends AsyncTask<Void, AsyncTaskProgressInf
 	 */
 	private HttpTransportSE _transport = new HttpTransportSE(_serviceUrl);
 	
+	/** 
+	 * Contains all Requests that are handled in the background
+	 */
 	private BlockingQueue<Request> _requestQueue = new LinkedBlockingQueue<Request>();
 
 	/** Single Request that is run before any Request in _requestQueue,
@@ -54,8 +73,65 @@ public class CrossingWaysConnection extends AsyncTask<Void, AsyncTaskProgressInf
 	 */
 	private Request _requeuedRequest = null;
 	
+	/** Lock combined with the priority Queue condition */
+	private final Lock _requestLock = new ReentrantLock();
+	
+	/** Is signaled if an element is enqueued in the priority queue.
+	 * If the worker thread is currently sleeping, it wakes up.
+	 */
+	private final Condition _requestCond = _requestLock.newCondition();
+	
 	/**
-	 * Performs a SOAP Call to the Crossingways webservice, wo the specified
+	 * Contains the priority requests, which are always handled before the normal requestQueue and 
+	 * without waiting for the connection to wake up, these requests wake up the connection! Really VIP! :-) 
+	 * 
+	 * Another option would be to use only one Queue, a PriorityBlockingQueue but then we maybe would have to add
+	 * a comparation algorithm to be sure that low priority elements are ordered the way the come in.
+	 * For now, this approach flexible is enough
+	 */
+	private BlockingQueue<Request> _priorityQueue = new LinkedBlockingQueue<Request>();
+	
+	/** Requeue mechanism for priorityQueue */
+	private Request _priorityRequeueRequest = null;
+	
+	
+	/**
+	 * Enqueues the given request as priority Request, and wakes up the WorkerThread for immediate processing
+	 * 
+	 * @param request
+	 */
+	private void EnqueuePriorityRequest(Request request)
+	{
+		try
+		{
+			_requestLock.lock();
+			_priorityQueue.add(request);
+			_requestCond.signal();
+		}
+		finally
+		{
+			_requestLock.unlock();
+		}
+		
+	}
+	
+	
+	private void EnqueueRequest(Request request)
+	{
+		try
+		{
+			_requestLock.lock();
+			_requestQueue.add(request);
+			_requestCond.signal();
+		}
+		finally
+		{
+			_requestLock.unlock();
+		}
+	}
+	
+	/**
+	 * Performs a SOAP Call to the Crossingways webservice, for the specified
 	 * method with the specified arguments
 	 * 
 	 * @param <T> Returntype of the SOAP Call, if unsure use Object
@@ -64,8 +140,7 @@ public class CrossingWaysConnection extends AsyncTask<Void, AsyncTaskProgressInf
 	 * @throws CWException 
 	 */
 	@SuppressWarnings("unchecked")
-	private <T> T PerformSOAPCall(String methodName, PropertyInfo[] propertyInfos, IEnvelopeSetupCallback envSetup) throws CWException
-		
+	private <T> T PerformSOAPCall(String methodName, PropertyInfo[] propertyInfos, IEnvelopeSetupCallback envSetup) throws CWException	
 	{
 		synchronized(_transport)
 		{
@@ -88,7 +163,11 @@ public class CrossingWaysConnection extends AsyncTask<Void, AsyncTaskProgressInf
 			try 
 			{
 				_transport.debug = true;
+				
+				
+				
 				_transport.call(_namespace + methodName, envelope);
+				
 				return (T)envelope.getResponse();
 			} 
 			catch (Exception e) 
@@ -187,6 +266,17 @@ public class CrossingWaysConnection extends AsyncTask<Void, AsyncTaskProgressInf
 		}
 	}
 	
+	/**
+	 * Synchronous Position update, used by the worker thread (actually by the posted request)
+	 * 
+	 * @param username
+	 * @param pwHash 
+	 * @param trackId (??)
+	 * @param message Message to be displayed on the live tracker icon
+	 * @param locations Locations in sequence to send
+	 * @return Parsed message from the server, indicating the success of the request
+	 * @throws CWException
+	 */
 	@SuppressWarnings("unchecked")
 	public ServerMessage UpdateCurrentPosition(String username, String pwHash,
 			Integer trackId, String message, LocationIdentifier...locations) throws CWException
@@ -239,6 +329,65 @@ public class CrossingWaysConnection extends AsyncTask<Void, AsyncTaskProgressInf
 	}
 
 	/**
+	 * Synchronous upload a gpx file, used by the worker thread (actually by the posted request)
+	 * @param username
+	 * @param pwHash
+	 * @param trackName
+	 * @param gpxData
+	 * @return
+	 * @throws CWException 
+	 */
+	public ServerMessage UploadGpx(UploadGPXRequest request) throws CWException
+	{
+		if(request.getCallback() != null)
+			this.publishProgress(new CallbackInfo(request.getCallback(), RequestProgressInfo.CreateStartingInfo(), request));
+
+		try
+		{
+			Vector<PropertyInfo> properties = new Vector<PropertyInfo>();
+			properties.add(CreatePrimitivePropertyInfo("username", request.getUsername()));
+			properties.add(CreatePrimitivePropertyInfo("password", request.getPwHash()));
+			properties.add(CreatePrimitivePropertyInfo("trackname", request.getTrackname()));
+			properties.add(CreatePrimitivePropertyInfo("gpx", request.getGPXData()));
+			
+			String serverMessage = PerformSOAPCall("UploadGPX", 
+					properties.toArray(new PropertyInfo[0]),
+					null).toString();
+			
+			ServerMessage msg = new ServerMessage(serverMessage);
+			
+			if(request.getCallback() != null)
+				this.publishProgress(new CallbackInfo(request.getCallback(), RequestProgressInfo.CreateCompletionInfo(), request));
+			
+			return msg;
+		}
+		catch(CWException e)
+		{
+			if(request.getCallback() != null)
+			{
+				//Post the execution callback and wait till it's executed by the ui thread
+				CallbackInfo ci = new CallbackInfo(request.getCallback(), RequestProgressInfo.CreateErrorInfo(e.toString()), request);				
+				try
+				{
+					ci.AcquireExecutionLock();
+					this.publishProgress(ci);
+					ci.WaitForExecution();
+				}
+				finally
+				{
+					ci.ReleaseExecutionLock();
+				}
+				
+				throw new CWWithCallbackInfoException(e.getMessage(), ci);
+				
+			}
+			
+			throw e;
+		}
+	}
+	
+	
+	/**
 	 * Posts an asynchronous LogPosition Request
 	 * @param username
 	 * @param password
@@ -261,7 +410,7 @@ public class CrossingWaysConnection extends AsyncTask<Void, AsyncTaskProgressInf
 					"AndroidTracker",
 					location);
 		
-		_requestQueue.add(request);
+			EnqueueRequest(request);
 		} 
 		catch (Exception e) 
 		{
@@ -270,40 +419,38 @@ public class CrossingWaysConnection extends AsyncTask<Void, AsyncTaskProgressInf
 		}
 	}
 
-	@Override
-	protected Void doInBackground(Void... arg0) 
+	/**
+	 * Posts an asynchronous UploadGpx request.
+	 * 
+	 * This posted request is not handled the same way a CurrentPosition(CP) request is handled.  
+	 * CP-Requests are collected and once every few seconds or even minutes they are transmitted at once.
+	 * The UI does not get immediate information about the status of the request.
+	 * This is not the way a GPX Request should be processed. The request should be handled immediatly 
+	 * (also if other queued requests are waiting), the user should get an immediate status response and 
+	 * should be notified on completion. So this more handled like a synchronous request, but without
+	 * blocking the calling thread. This kind of request is called "priority request", they are handled 
+	 * by a second request queue which is prioritized by the worker thread
+	 */
+	public void PostGPXUploadRequest(String username, String password, String trackName, String gpxData)
+		throws CWException
 	{
-		try
+		try 
 		{
-			while(true)
-			{
-				/** Currently the Thread is sleeping while not active because the only requests
-				 * that are handled by this thread are LogPositions requests. 
-				 * Once there are more requests available (Upload gpx,...)
-				 * Some other mechanism must be implemented...
-				 */
-				Thread.sleep(Environment.Instance().Settings().getLiveTrackerCommitInterval());
-				Request myRequest = null;
-				
-				if(_requeuedRequest != null)
-					myRequest = _requeuedRequest;
-				else
-					myRequest =_requestQueue.take();
-				
-				MergeRequest(myRequest);
-				
-				//On Request failure, requeue the request and run later
-				if(myRequest.Execute(this) == false)
-					_requeuedRequest = myRequest;
-				else
-					_requeuedRequest = null;
-			}
-		}
-		catch(InterruptedException e)
-		{
+			Request gpxRequest = new UploadGPXRequest(
+					username, 
+					HashUtils.HashPassword(password),
+					trackName,
+					gpxData
+					);
 			
+			EnqueuePriorityRequest(gpxRequest);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			throw new CWException(e.toString());
 		}
-		return null;
+		
 	}
 
 	/**
@@ -322,6 +469,112 @@ public class CrossingWaysConnection extends AsyncTask<Void, AsyncTaskProgressInf
 		{
 			if(baseRequest.TryMerge(requestToMerge))
 				_requestQueue.remove();
+		}
+	}
+	
+	@Override
+	protected Void doInBackground(Void... arg0) 
+	{
+		try
+		{
+			long lastLowPriorityExecution = System.nanoTime();
+			
+			while(true)
+			{
+				/** The thread is sleeping while not active and wakes up (achieved by a condition variable)
+				 *  on new priority items or if the timeout for low priority items is met
+				 */				
+				
+				long millisSinceLastLowPriorityExecution = (System.nanoTime() - lastLowPriorityExecution) / 1000;
+				long millisLowPriorityCommitInterval =  Environment.Instance().Settings().getLiveTrackerCommitInterval() * 1000;
+				try
+				{
+					_requestLock.lock();
+					
+					
+					
+					// if no priority elements are available and it's not time to execute low priority requests,
+					// we fall asleep till a priority item comes in or the timeout elapses and low priority requests are processed
+					if(_priorityQueue.isEmpty() && _priorityRequeueRequest == null &&
+						_requestQueue == null && _requestQueue.isEmpty())
+					{
+						_requestCond.await();
+					}
+					else if(_priorityQueue.isEmpty() && _priorityRequeueRequest == null &&		
+						millisSinceLastLowPriorityExecution < millisLowPriorityCommitInterval) 
+					{				
+						_requestCond.await(millisLowPriorityCommitInterval - millisSinceLastLowPriorityExecution, TimeUnit.MILLISECONDS);	
+					}
+				}
+				finally
+				{
+					_requestLock.unlock();
+				}
+				
+				boolean isLowPriorityRequest = false;
+				Request myRequest = null;
+				
+				if(_priorityRequeueRequest != null)
+					myRequest = _priorityRequeueRequest;
+				else if(_priorityQueue.isEmpty() == false)
+					myRequest = _priorityQueue.take();				
+				else if(_requeuedRequest != null && millisSinceLastLowPriorityExecution >= millisLowPriorityCommitInterval)
+				{
+					isLowPriorityRequest = true;
+					myRequest = _requeuedRequest;
+				}
+				else if(_requestQueue.isEmpty() == false && millisSinceLastLowPriorityExecution >= millisLowPriorityCommitInterval)
+				{
+					isLowPriorityRequest = true;
+					myRequest =_requestQueue.take();
+				}
+				
+				if(myRequest != null)
+				{
+					MergeRequest(myRequest);
+					
+					//On Request failure, requeue the request and run later
+					if(myRequest.Execute(this) == false)
+					{
+						if(isLowPriorityRequest)
+							_requeuedRequest = myRequest;
+						else
+							_priorityRequeueRequest = myRequest;
+					}
+					else
+					{
+						if(isLowPriorityRequest)
+							_requeuedRequest = null;
+						else
+							_priorityRequeueRequest = null;
+						
+					}
+					
+					if(isLowPriorityRequest)
+						lastLowPriorityExecution = System.nanoTime();
+				}
+			}
+		}
+		catch(InterruptedException e)
+		{
+			
+		}
+		return null;
+	}
+	
+	@Override
+	protected void onProgressUpdate(CallbackInfo... values) 
+	{
+		values[0].getUiCallback().StatusUpdate(values[0].getProgressInfo());
+		
+		try
+		{
+			values[0].AcquireExecutionLock();
+			values[0].SignalExecution();
+		}
+		finally
+		{
+			values[0].ReleaseExecutionLock();
 		}
 	}
 }

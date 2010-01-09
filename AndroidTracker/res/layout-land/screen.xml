@@ -10,21 +10,22 @@
 		android:text="@string/start_recording"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_margin="10px"
+		android:layout_marginLeft="10sp"
+		android:layout_marginTop="10sp"
 		android:drawableLeft="@drawable/red_off"
-		>		
+		>
+		
 	
 	</Button>
 	
-
 	<TableLayout
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:stretchColumns="0"
-		android:padding="10sp"
+		android:paddingLeft="10sp"
 		>
 		
-		<!--  Duration/Speed header row -->
+		<!--  Duration/Speed/Distance header row -->
 		<TableRow>
 			<TextView
 				android:id="@+id/labelDurationHeader"
@@ -35,21 +36,31 @@
 				android:id="@+id/labelSpeedHeader"
 				android:text="@string/speed"
 				android:textStyle="bold"
+				android:layout_span="2"
 				/>
+			<TextView
+				android:id="@+id/labelDistanceHeader"
+				android:text="@string/distance"
+				android:textStyle="bold"
+				android:layout_span="2"
+				/>
+				
+			
+			
 		</TableRow>
 		
-		<!--  Duration/Speed content row -->
+		<!--  Duration/Speed/distance content row -->
 		<TableRow>
 			<TextView
 				android:id="@+id/labelDuration"
 				android:text="00:00:00"
-				android:textSize="40sp"
+				android:textSize="30sp"
 				android:textStyle="bold"
 				/>
 			<TextView
 				android:id="@+id/labelSpeed"
 				android:text="000"
-				android:textSize="40sp"
+				android:textSize="30sp"
 				android:textStyle="bold"
 				/>
 			<TextView
@@ -60,35 +71,10 @@
 				android:layout_gravity="bottom"
 				android:padding="10sp"
 				/>
-		</TableRow>
-	</TableLayout>
-		
-	<TableLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:stretchColumns="1"
-		android:padding="10sp"
-		>
-		<!--  Distance/LiveTracking Header row -->
-		<TableRow>
-			<TextView
-				android:id="@+id/labelDistanceHeader"
-				android:text="@string/distance"
-				android:layout_span="2"
-				/>
-			<TextView
-				android:id="@+id/labelLiveTrackingHeader"
-				android:text="@string/livetracking"
-				android:textStyle="bold"
-				/>
-		</TableRow>
-		
-		<!--  Distance/Live Tracking Content row -->
-		<TableRow>
-			<TextView
+				<TextView
 				android:id="@+id/labelDistance"
 				android:text="000000"
-				android:textSize="40sp"
+				android:textSize="30sp"
 				android:textStyle="bold"
 				/>
 			<TextView
@@ -99,16 +85,8 @@
 				android:layout_gravity="bottom"
 				android:padding="10sp"
 				/>
-			<ToggleButton 
-				android:id="@+id/buttonStartLiveTracking"
-				android:layout_width="wrap_content" 
-				android:layout_gravity="center" 
-				android:layout_height="wrap_content" 
-				android:textOn="" 
-				android:textOff="" 
-				android:background="@drawable/togglebutton_onoff_selector"
-				>
-			</ToggleButton>
+				
+
 		</TableRow>
 	</TableLayout>
 		
@@ -155,6 +133,14 @@
 				android:textStyle="bold"
 				android:layout_marginLeft="7sp"
 				/>
+				
+			<TextView
+				android:id="@+id/labelLiveTrackingHeader"
+				android:text="@string/livetracking"
+				android:textStyle="bold"
+				android:layout_marginLeft="30sp"
+				/>
+				
 		</TableRow>
 		
 		<TableRow>
@@ -193,6 +179,18 @@
 				android:textStyle="bold"
 				android:layout_marginLeft="7sp"
 				/>
+				
+			<ToggleButton 
+				android:id="@+id/buttonStartLiveTracking"
+				android:layout_width="wrap_content" 
+				android:layout_gravity="center" 
+				android:layout_height="wrap_content" 
+				android:textOn="" 
+				android:textOff="" 
+				android:background="@drawable/togglebutton_onoff_selector"
+				android:layout_marginLeft="18sp"
+				>
+			</ToggleButton>
 		</TableRow>
 		
 		<TableRow>

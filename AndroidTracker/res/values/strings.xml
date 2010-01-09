@@ -19,4 +19,8 @@
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
     <string name="altitude">Altitude</string>
+    <string name="degree_suffix">°</string>
+    <string name="minute_suffix">\'</string>
+    <string name="second_suffix">\"</string>
+    <string name="start_recording">Start recording</string>
 </resources>

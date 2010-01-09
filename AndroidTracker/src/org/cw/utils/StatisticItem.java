@@ -61,6 +61,7 @@ public class StatisticItem {
 		if(loc == null)
 			throw new IllegalArgumentException("Got no location");
 		
+	
 		_distance += loc.getLocation().distanceTo(_last_loc.getLocation());
 		
 		Calendar cal = new GregorianCalendar();

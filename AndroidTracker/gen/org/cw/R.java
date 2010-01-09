@@ -19,13 +19,16 @@ public final class R {
         public static final int icon=0x7f020002;
         public static final int off=0x7f020003;
         public static final int on=0x7f020004;
-        public static final int settings=0x7f020005;
-        public static final int togglebutton_onoff_selector=0x7f020006;
+        public static final int red_off=0x7f020005;
+        public static final int red_on=0x7f020006;
+        public static final int settings=0x7f020007;
+        public static final int togglebutton_onoff_selector=0x7f020008;
     }
     public static final class id {
         public static final int buttonOk=0x7f060022;
         public static final int buttonSettings=0x7f060019;
         public static final int buttonStartLiveTracking=0x7f06000a;
+        public static final int buttonStartRecording=0x7f060000;
         public static final int buttonTracks=0x7f060018;
         public static final int buttonVerifyCredentials=0x7f06001e;
         public static final int labelAltitude=0x7f060016;
@@ -56,7 +59,6 @@ public final class R {
         public static final int labelVerifyCredentials=0x7f06001f;
         public static final int textCommitInterval=0x7f060021;
         public static final int textPassword=0x7f06001d;
-        public static final int textTourname=0x7f060000;
         public static final int textUsername=0x7f06001b;
     }
     public static final class layout {
@@ -71,6 +73,7 @@ public final class R {
         public static final int altitude=0x7f050012;
         public static final int app_name=0x7f050001;
         public static final int commit_interval=0x7f050007;
+        public static final int degree_suffix=0x7f050013;
         public static final int distance=0x7f05000c;
         public static final int duration=0x7f05000a;
         public static final int hello=0x7f050000;
@@ -79,9 +82,12 @@ public final class R {
         public static final int livetracking_off=0x7f05000f;
         public static final int livetracking_on=0x7f05000e;
         public static final int longitude=0x7f050010;
+        public static final int minute_suffix=0x7f050014;
         public static final int password=0x7f050004;
+        public static final int second_suffix=0x7f050015;
         public static final int settings=0x7f050006;
         public static final int speed=0x7f05000b;
+        public static final int start_recording=0x7f050016;
         public static final int username=0x7f050003;
     }
 }

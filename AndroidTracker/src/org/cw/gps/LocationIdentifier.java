@@ -40,6 +40,44 @@ public class LocationIdentifier
 		
 	}
 	
+	public double getLongitudeDegrees()
+	{
+		return _location.getLongitude();
+	}
+	
+	public double getLongitudeMinutes()
+	{
+		double degree = getLongitudeDegrees();
+		
+		return (double)((degree - (int)degree)) * 60.0;
+	}
+	
+	public double getLongitudeSeconds()
+	{
+		double minutes = getLongitudeMinutes();
+		
+		return (double)((minutes - (int)minutes)) * 60.0;
+	}
+	
+	public double getLatitudeDegrees()
+	{
+		return _location.getLatitude();
+	}
+	
+	public double getLatitudeMinutes()
+	{
+		double degree = getLatitudeDegrees();
+		
+		return (double)((degree - (int)degree)) * 60.0;
+	}
+	
+	public double getLatitudeSeconds()
+	{
+		double minutes = getLatitudeMinutes();
+		
+		return (double)((minutes - (int)minutes)) * 60.0;
+	}
+	
 	public Location getLocation(){ return _location; }
 	public Date getDateTime(){ return _dateTime; }
 	public float getSpeed(){ return _speed; }

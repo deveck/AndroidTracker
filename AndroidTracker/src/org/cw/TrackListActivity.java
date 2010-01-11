@@ -20,7 +20,7 @@ public class TrackListActivity extends Activity {
 	private Button _buttonCancel;
 		
 	//TODO: changes on layout required! Max size an scrolling of list view
-	String[] test = {"1","2","3","4"};
+	String[] test = {"1","2","3","4", "5", "6", "7", "8"};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{

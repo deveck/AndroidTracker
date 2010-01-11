@@ -2,25 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:padding="10px"
+	android:padding="10sp"
 	android:orientation="vertical">
 
  	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
  		android:layout_width="fill_parent"
  		android:layout_height="wrap_content"
- 		android:padding="10px"
+ 		android:padding="10sp"
  		android:orientation="vertical">
  		
  		<TextView android:id="@+id/labelTrackList"
  			android:layout_width="wrap_content"
  			android:layout_height="wrap_content"
  			android:text="@string/textTrackList"
-			android:textStyle="bold" />
+			android:textStyle="bold"
+			android:textSize="15sp"
+			 />
 	</LinearLayout>
 	
 	<TableLayout android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:stretchColumns="*">
+		android:stretchColumns="0">
 		
 		<TableRow android:layout_width="fill_parent"
 			android:layout_height="wrap_content">
@@ -28,8 +30,8 @@
 			<ListView android:id="@+id/listTrackList"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:choiceMode="singleChoice">
-				android:layout_span="2"
+				android:choiceMode="singleChoice"
+				android:layout_span="2">
 			</ListView>
 
 		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -40,22 +42,30 @@
 		<Button android:id="@+id/buttonTrackListLoad"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="@string/textLoad" />
+				android:text="@string/textLoad" 
+				android:background="@android:drawable/btn_default_small"
+				/>
 				
 		<Button android:id="@+id/buttonTrackListUpLoad"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="@string/textUpLoad" />
+				android:text="@string/textUpLoad" 
+				android:background="@android:drawable/btn_default_small"
+				/>
 		
 		<Button android:id="@+id/buttonTrackListDelete"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="@string/textDelete" />
+				android:text="@string/textDelete" 
+				android:background="@android:drawable/btn_default_small"
+				/>
 
 		<Button android:id="@+id/buttonTrackListCancel"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="@string/textCancel" />
+				android:text="@string/textCancel" 
+				android:background="@android:drawable/btn_default_small"
+				/>
 		</LinearLayout>
 		</TableRow>
 	</TableLayout>

@@ -12,6 +12,7 @@
 		android:layout_height="wrap_content"
 		android:layout_margin="10px"
 		android:drawableLeft="@drawable/red_off"
+		android:background="@android:drawable/btn_default_small"
 		>		
 	
 	</Button>

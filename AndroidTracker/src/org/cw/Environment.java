@@ -68,29 +68,6 @@ public class Environment
 	public SettingsEnvironment Settings(){return _settings;}
 	
 	private TrackInformation _currenttrack = null;
-	public void registerTrack(Context ctx, TrackInformation track){
-		if(_currenttrack != null)
-		{
-	    	AlertDialog.Builder alert = new AlertDialog.Builder(ctx);
-	    	alert.setTitle("Warning possible loose of data");
-	    	alert.setMessage("Store " + _currenttrack.getName() + " now?");
-	    	alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					_currenttrack.save();					
-				}
-			});
-	    	alert.setNegativeButton("NO", null);
-	    	alert.show();
-	    	try{
-	    		alert.wait();
-	    	}
-	    	catch (Exception e) {
-	    		e.toString();
-				// TODO: handle exception
-			}
-		}
-		_currenttrack = track;
-	}
+	public void registerTrack(TrackInformation track){ _currenttrack = track; }
 	public TrackInformation getCurrentTrack(){ return _currenttrack; }
 }

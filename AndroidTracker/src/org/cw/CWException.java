@@ -1,6 +1,5 @@
 package org.cw;
 
-import org.cw.utils.AlertBuilder;
 
 public class CWException extends Exception 
 {

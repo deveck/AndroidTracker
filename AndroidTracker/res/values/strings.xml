@@ -23,4 +23,14 @@
     <string name="minute_suffix">\'</string>
     <string name="second_suffix">\"</string>
     <string name="start_recording">Start recording</string>
+<string name="trackname">Track Name</string>
+<string name="textTrackdescription">Summary</string>
+<string name="textOK">OK</string>
+<string name="textCancel">Cancel</string>
+<string name="textTrackList">Available Tracks</string>
+<string name="textLoad">Load</string>
+<string name="textUpLoad">UpLoad</string>
+<string name="textDelete">Delete</string>
+<string name="tracklist">Track List</string>
+<string name="newtrack">New track registration</string>
 </resources>

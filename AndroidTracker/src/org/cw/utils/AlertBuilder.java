@@ -21,4 +21,14 @@ public class AlertBuilder
 			.show();
 	}
 	
+	public void ShowYesNoBox(String message, String title)
+	{
+		new AlertDialog.Builder(_ctx)
+			.setMessage(message)
+			.setTitle(title)
+			.setPositiveButton("YES", null)
+			.setNegativeButton("NO", null)
+			.show();
+	}
+	
 }

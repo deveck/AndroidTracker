@@ -3,19 +3,15 @@ package org.cw;
 import org.cw.gps.IGpsStatusReceiver;
 import org.cw.gps.LiveTrackingUpdater;
 import org.cw.gps.LocationIdentifier;
-import org.cw.utils.StatisticItem;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
@@ -30,6 +26,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 	
 	private Button _startRecordingButton;
+	private Button _manageTracks;
 	private ToggleButton _toggleLiveTracker;
 	private TextView _labelLatitudeDegree;
 	private TextView _labelLatitudeMinutes;
@@ -62,6 +59,14 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
         _labelLongitudeSeconds = (TextView)findViewById(R.id.labelLongitudeSeconds);
         _labelAltitude = (TextView)findViewById(R.id.labelAltitude);
         _startRecordingButton = (Button)findViewById(R.id.buttonStartRecording);
+        _manageTracks = (Button)findViewById(R.id.buttonTracks);
+        
+        _manageTracks.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ButtonTracks_Clicked();
+			}
+		});
         
         ((Button)findViewById(R.id.buttonSettings)).setOnClickListener(new OnClickListener() {
 			@Override
@@ -86,6 +91,11 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 			}
 		});
     }
+    
+    private void ButtonTracks_Clicked()
+    {
+    	startActivity(new Intent(this, TrackListActivity.class));
+	}
         
     private void ButtonSettings_Clicked()
     {
@@ -95,8 +105,38 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
    
     private void ButtonStartRecording_Clicked()
     {
-    	
+    	startActivity(new Intent(this, NewTrackActivity.class));
     }
+    //	startActivity(new Intent(this, TrackListActivity.class));
+//    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//    	alert.setTitle("lala");
+//    	final EditText edit = new EditText(this);
+//    	alert.setView(edit);
+//    	alert.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+//    	
+//    	alert.show();
+			
+//			@Override
+//			public void dismiss() {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void cancel() {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+    	
+  //}
 
 	@Override
 	public void LocationChanged(LocationIdentifier newLocation) {

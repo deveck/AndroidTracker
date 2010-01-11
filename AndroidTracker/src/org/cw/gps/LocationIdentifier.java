@@ -81,5 +81,6 @@ public class LocationIdentifier
 	public Location getLocation(){ return _location; }
 	public Date getDateTime(){ return _dateTime; }
 	public float getSpeed(){ return _speed; }
-	
+	public long getTime(){ return _dateTime.getTime(); }
+	public double distanceTo(LocationIdentifier dest){ return _location.distanceTo(dest.getLocation()); }
 }

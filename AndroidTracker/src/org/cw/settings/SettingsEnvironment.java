@@ -1,5 +1,7 @@
 package org.cw.settings;
 
+import org.cw.dataitems.TrackInformation;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 

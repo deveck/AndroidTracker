@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
@@ -35,6 +36,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 	private TextView _labelLongitudeMinutes;
 	private TextView _labelLongitudeSeconds;
 	private TextView _labelAltitude;
+	private TextView _labelSpeed;
 	
 
 	/** Called when the activity is first created. */
@@ -58,6 +60,8 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
         _labelLongitudeMinutes = (TextView)findViewById(R.id.labelLongitudeMinutes);
         _labelLongitudeSeconds = (TextView)findViewById(R.id.labelLongitudeSeconds);
         _labelAltitude = (TextView)findViewById(R.id.labelAltitude);
+        _labelSpeed = (TextView)findViewById(R.id.labelSpeed);
+        
         _startRecordingButton = (Button)findViewById(R.id.buttonStartRecording);
         _manageTracks = (Button)findViewById(R.id.buttonTracks);
         
@@ -171,5 +175,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 				String.format("%.4f%s", newLocation.getLatitudeSeconds(),getResources().getString(R.string.second_suffix)));
 		
 		_labelAltitude.setText(new Integer((int)newLocation.getLocation().getAltitude()).toString());
+		
+		_labelSpeed.setText(String.format("%.2f", newLocation.getSpeed()));
 	}
 }

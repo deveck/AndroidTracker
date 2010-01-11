@@ -154,6 +154,8 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 		}*/
 		
 		
+		
+		
 		_labelLongitudeDegree.setText(
 				new Integer((int) newLocation.getLongitudeDegrees()).toString() + getResources().getString(R.string.degree_suffix));
 		_labelLongitudeMinutes.setText(

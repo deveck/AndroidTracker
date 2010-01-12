@@ -14,15 +14,16 @@ public final class R {
         public static final int gray=0x7f040000;
     }
     public static final class drawable {
-        public static final int checkmark=0x7f020000;
-        public static final int cross=0x7f020001;
-        public static final int icon=0x7f020002;
-        public static final int off=0x7f020003;
-        public static final int on=0x7f020004;
-        public static final int red_off=0x7f020005;
-        public static final int red_on=0x7f020006;
-        public static final int settings=0x7f020007;
-        public static final int togglebutton_onoff_selector=0x7f020008;
+        public static final int application_logo=0x7f020000;
+        public static final int checkmark=0x7f020001;
+        public static final int cross=0x7f020002;
+        public static final int icon=0x7f020003;
+        public static final int off=0x7f020004;
+        public static final int on=0x7f020005;
+        public static final int red_off=0x7f020006;
+        public static final int red_on=0x7f020007;
+        public static final int settings=0x7f020008;
+        public static final int togglebutton_onoff_selector=0x7f020009;
     }
     public static final class id {
         public static final int buttonOk=0x7f060028;

@@ -5,9 +5,10 @@ package org.cw.gps;
  * received gps updates
  * 
  * @author Andreas Reiter <andreas.reiter@student.tugraz.at>
+ * 
  *
  */
 public interface IGpsRecorder 
 {
 	void AddLocation(LocationIdentifier newLocation);
-}
+} 

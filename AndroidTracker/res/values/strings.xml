@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, TrackerApp!</string>
-    <string name="app_name">AndroidTracker</string>
+    <string name="app_name">Crossingways LiveTracking</string>
     <string name="Save">Save</string>
     <string name="username">Username:</string>
     <string name="password">Password:</string>

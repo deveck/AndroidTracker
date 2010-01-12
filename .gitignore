@@ -3,6 +3,7 @@
 *.pdf
 *.backup
 *.*~
+*.toc
 bin
 .hg
 .hgignore

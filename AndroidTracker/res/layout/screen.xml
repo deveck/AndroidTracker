@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	 	
+	android:orientation="vertical" android:background="@drawable/background">
+	
+	<Button
+		android:id="@+id/buttonStartRecording"
+		android:text="@string/start_recording"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="10px"
+		android:drawableLeft="@drawable/red_off"
+		android:background="@android:drawable/btn_default_small"
+		>		
+	
+	</Button>
+	
+
+	<TableLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:stretchColumns="0"
+		android:padding="10sp"
+		>
+		
+		<!--  Duration/Speed header row -->
+		<TableRow>
+			<TextView
+				android:id="@+id/labelDurationHeader"
+				android:text="@string/duration"
+				android:textStyle="bold"
+				/>
+			<TextView
+				android:id="@+id/labelSpeedHeader"
+				android:text="@string/speed"
+				android:textStyle="bold"
+				/>
+		</TableRow>
+		
+		<!--  Duration/Speed content row -->
+		<TableRow>
+			<TextView
+				android:id="@+id/labelDuration"
+				android:text="00:00:00"
+				android:textSize="30sp"
+				android:textStyle="bold"
+				/>
+			<TextView
+				android:id="@+id/labelSpeed"
+				android:text="000"
+				android:textSize="30sp"
+				android:textStyle="bold"
+				android:gravity="right"
+				/>
+			<TextView
+				android:id="@+id/labelSpeedUnit"
+				android:text="Km/h"
+				android:textSize="15sp"
+				android:textStyle="bold"
+				android:layout_gravity="bottom"
+				android:padding="10sp"
+				/>
+		</TableRow>
+	</TableLayout>
+		
+	<TableLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:stretchColumns="1"
+		android:padding="10sp"
+		>
+		<!--  Distance/LiveTracking Header row -->
+		<TableRow>
+			<TextView
+				android:id="@+id/labelDistanceHeader"
+				android:text="@string/distance"
+				android:layout_span="2"
+				/>
+			<TextView
+				android:id="@+id/labelLiveTrackingHeader"
+				android:text="@string/livetracking"
+				android:textStyle="bold"
+				/>
+		</TableRow>
+		
+		<!--  Distance/Live Tracking Content row -->
+		<TableRow>
+			<TextView
+				android:id="@+id/labelDistance"
+				android:text="000000"
+				android:textSize="40sp"
+				android:textStyle="bold"
+				/>
+			<TextView
+				android:id="@+id/labelDistanceUnit"
+				android:text="mts"
+				android:textSize="15sp"
+				android:textStyle="bold"
+				android:layout_gravity="bottom"
+				android:padding="10sp"
+				/>
+			<ToggleButton 
+				android:id="@+id/buttonStartLiveTracking"
+				android:layout_width="wrap_content" 
+				android:layout_gravity="center" 
+				android:layout_height="wrap_content" 
+				android:textOn="" 
+				android:textOff="" 
+				android:background="@drawable/togglebutton_onoff_selector"
+				>
+			</ToggleButton>
+		</TableRow>
+	</TableLayout>
+		
+	<TableLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:stretchColumns="0"
+		android:padding="5sp"
+		>
+		
+		<TableRow>
+			<TextView
+				android:id="@+id/labelLatitudeHeader"
+				android:text="@string/latitude"
+				android:textStyle="bold"
+				android:padding="10sp"
+				/>
+			<TextView
+				android:id="@+id/labelLatitudeDegree"
+				android:text="00°"
+				android:textSize="25sp"
+				android:textStyle="bold"
+				android:gravity="right"				
+				/>
+			<TextView
+				android:id="@+id/labelLatitudeMinutes"
+				android:text="00'"
+				android:textSize="25sp"
+				android:textStyle="bold"
+				android:layout_marginLeft="7sp"
+				android:gravity="right"
+				/>
+			<TextView
+				android:id="@+id/labelLatitudeSeconds"
+				android:text='00"'
+				android:textSize="25sp"
+				android:textStyle="bold"
+				android:layout_marginLeft="7sp"
+				android:gravity="right"
+				/>
+			<TextView
+				android:id="@+id/labelLatitudeUnit"
+				android:text="N"
+				android:textSize="25sp"
+				android:textStyle="bold"
+				android:layout_marginLeft="7sp"
+				/>
+		</TableRow>
+		
+		<TableRow>
+			<TextView
+				android:id="@+id/labelLongitudeHeader"
+				android:text="@string/longitude"
+				android:textStyle="bold"
+				android:padding="10sp"
+				/>
+							<TextView
+				android:id="@+id/labelLongitudeDegree"
+				android:text="00°"
+				android:textSize="25sp"
+				android:textStyle="bold"
+				android:gravity="right"
+				/>
+			<TextView
+				android:id="@+id/labelLongitudeMinutes"
+				android:text="00'"
+				android:textSize="25sp"
+				android:textStyle="bold"
+				android:layout_marginLeft="7sp"
+				android:gravity="right"
+				/>
+			<TextView
+				android:id="@+id/labelLongitudeSeconds"
+				android:text='00"'
+				android:textSize="25sp"
+				android:textStyle="bold"
+				android:layout_marginLeft="7sp"
+				android:gravity="right"
+				/>
+			<TextView
+				android:id="@+id/labelLongitudeUnit"
+				android:text="E"
+				android:textSize="25sp"
+				android:textStyle="bold"
+				android:layout_marginLeft="7sp"
+				/>
+		</TableRow>
+		
+		<TableRow>
+			<TextView
+				android:id="@+id/labelAltitudeHeader"
+				android:text="@string/altitude"
+				android:textStyle="bold"
+				android:padding="10sp"
+				/>
+				
+			<TextView
+				android:id="@+id/labelAltitude"
+				android:text="000000"
+				android:textSize="25sp"
+				android:textStyle="bold"
+				android:layout_span="3"
+				android:gravity="right"
+				/>
+				
+			<TextView
+				android:id="@+id/labelAltitudeUnit"
+				android:text="mts"
+				android:textSize="15sp"
+				android:textStyle="bold"
+				android:layout_marginLeft="5sp"
+				/>
+		</TableRow>
+		
+	</TableLayout>
+	
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent" 
+	android:orientation="horizontal">
+		<ImageButton 
+			android:id="@+id/btnMenueRecord" 
+			android:src="@drawable/menus_record"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content">
+		</ImageButton>
+		<ImageButton 
+			android:id="@+id/btnMenueTracks" 
+			android:src="@drawable/menu_tracks"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content">
+		</ImageButton>	
+		<ImageButton 
+			android:id="@+id/btnMenueSettings" 
+			android:src="@drawable/menu settings"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content">
+		</ImageButton>
+	</LinearLayout>
+		
+	<TableLayout 
+		android:layout_height="fill_parent" 
+		android:layout_width="fill_parent"
+		android:orientation="horizontal"
+		android:stretchColumns="0"
+		android:gravity="bottom"
+		>
+		
+		<TableRow>
+			<Button 
+				android:id="@+id/buttonTracks"
+				android:layout_height="wrap_content" 
+				android:text="Tracks" 
+				android:layout_width="wrap_content"
+				android:background="@android:drawable/btn_default_small">
+			</Button>
+			<Button 
+				android:id="@+id/buttonSettings"
+				android:layout_height="wrap_content" 
+				android:text="Settings" 
+				android:layout_width="wrap_content"
+				android:background="@android:drawable/btn_default_small"
+				android:minWidth="100sp"
+				>
+			</Button>
+		</TableRow>
+
+</TableLayout>
+</LinearLayout>

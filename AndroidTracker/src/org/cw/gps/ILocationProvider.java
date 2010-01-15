@@ -6,7 +6,7 @@ package org.cw.gps;
  * @author Andreas Reiter <andreas.reiter@student.tugraz.at>
  *
  */
-public interface IGpsProvider 
+public interface ILocationProvider 
 {
 	LocationIdentifier GetLastKnownLocation();
 	

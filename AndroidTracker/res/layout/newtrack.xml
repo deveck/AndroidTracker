@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:padding="10px"
+	android:orientation="vertical">
+
+ 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ 		android:layout_width="fill_parent"
+ 		android:layout_height="wrap_content"
+ 		android:padding="10px"
+ 		android:orientation="vertical">
+ 		
+ 		<TextView android:id="@+id/labelTrackname"
+ 			android:layout_width="wrap_content"
+ 			android:layout_height="wrap_content"
+ 			android:text="@string/trackname"
+			android:textStyle="bold" />
+			
+		<EditText android:id="@+id/textTrackname"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:background="@android:drawable/editbox_background"/>
+		
+		<TextView android:id="@+id/labelTrackdescription"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/textTrackdescription"
+			android:textStyle="bold" />
+
+		<EditText android:id="@+id/textTrackdescription"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:background="@android:drawable/editbox_background"
+			android:inputType="textMultiLine"
+			android:isScrollContainer="true" />
+	</LinearLayout>
+
+	<TableLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:stretchColumns="*">
+		
+		<TableRow android:layout_width="fill_parent"
+			android:layout_height="wrap_content"><!--
+			
+			<Button android:id="@+id/buttonTrackOk"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/textOK"
+				android:layout_span="1"/>
+
+			<Button android:id="@+id/buttonTrackCancel"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/textCancel"
+				android:layout_span="1"/>
+		-->
+		<Button android:id="@+id/buttonTrackOk"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/textOK"
+				android:layout_span="1" />
+
+		<Button android:id="@+id/buttonTrackCancel"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:text="@string/textCancel"
+				android:layout_span="1" />
+		
+		</TableRow>
+	</TableLayout>
+
+</LinearLayout>

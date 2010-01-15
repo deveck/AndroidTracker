@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, TrackerApp!</string>
-    <string name="app_name">Crossingways</string>
-    <string name="doSOAPCall">Let\'s do a SOAP call to crossingways</string>
+    <string name="app_name">Crossingways LiveTracking</string>
+    <string name="Save">Save</string>
     <string name="username">Username:</string>
     <string name="password">Password:</string>
     <string name="GetGPSData">Get GPS data</string>
+    <string name="settings">Settings</string>
+    <string name="commit_interval">Live tracking commit interval(sec):</string>
+    <string name="CredentialsVerified">Credentials have been verified successfull</string>
+    <string name="CredentialsNotVerified">Credentials have not been verified, they will not be saved. Click on the cross to verify</string>
+    <string name="duration">Duration</string>
+    <string name="speed">Speed</string>
+    <string name="distance">Distance</string>
+    <string name="livetracking">Live tracking</string>
+    <string name="livetracking_on">On</string>
+    <string name="livetracking_off">Off</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="altitude">Altitude</string>
+    <string name="degree_suffix">°</string>
+    <string name="minute_suffix">\'</string>
+    <string name="second_suffix">\"</string>
+    <string name="start_recording">Start recording</string>
+<string name="trackname">Track Name</string>
+<string name="textTrackdescription">Summary</string>
+<string name="textOK">OK</string>
+<string name="textCancel">Cancel</string>
+<string name="textTrackList">Available Tracks</string>
+<string name="textLoad">Load</string>
+<string name="textUpLoad">UpLoad</string>
+<string name="textDelete">Delete</string>
+<string name="tracklist">Track List</string>
+<string name="newtrack">New track registration</string>
 </resources>

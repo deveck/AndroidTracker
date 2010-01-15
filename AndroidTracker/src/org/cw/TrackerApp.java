@@ -28,7 +28,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 	
 	
-	private Button _startRecordingButton;
+	private ImageButton _startRecordingButton;
 	private ImageButton _manageTracks;
 	private ToggleButton _toggleLiveTracker;
 	private TextView _labelLatitudeDegree;
@@ -64,7 +64,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
         _labelAltitude = (TextView)findViewById(R.id.labelAltitude);
         _labelSpeed = (TextView)findViewById(R.id.labelSpeed);
         
-        _startRecordingButton = (Button)findViewById(R.id.buttonStartRecording);
+        _startRecordingButton = (ImageButton)findViewById(R.id.buttonStartRecording);
         _manageTracks = (ImageButton)findViewById(R.id.buttonTracks);
         
         _manageTracks.setOnClickListener(new OnClickListener() {

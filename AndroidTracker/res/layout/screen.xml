@@ -10,12 +10,16 @@
 		android:layout_width="wrap_content" 
 		android:src="@drawable/logo"
 		android:layout_height="wrap_content" android:layout_gravity="top|center_horizontal">
-	</ImageView><ImageButton
+	</ImageView>
+	
+	<ImageButton
 		android:id="@+id/buttonStartRecording"
 		android:background="@drawable/empty"
-		android:layout_height="40px"
-		android:layout_width="200px"
-		android:src="@drawable/start_recording_bt" android:scaleType="centerInside" android:adjustViewBounds="true">		
+		android:layout_height="40sp"
+		android:layout_width="200sp"
+		android:src="@drawable/start_recording_bt" 
+		android:scaleType="fitXY"
+		android:adjustViewBounds="true">		
 	
 	</ImageButton>
 	
@@ -260,11 +264,9 @@
 				android:src="@drawable/menu_settings"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:scaleType="center">
+				android:scaleType="center"
+				>
 			</ImageButton>
 		</TableRow>
-
-</TableLayout>
-
-
+	</TableLayout>
 </LinearLayout>

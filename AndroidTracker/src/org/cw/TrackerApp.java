@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -26,8 +27,9 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
  */
 public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 	
+	
 	private Button _startRecordingButton;
-	private Button _manageTracks;
+	private ImageButton _manageTracks;
 	private ToggleButton _toggleLiveTracker;
 	private TextView _labelLatitudeDegree;
 	private TextView _labelLatitudeMinutes;
@@ -63,7 +65,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
         _labelSpeed = (TextView)findViewById(R.id.labelSpeed);
         
         _startRecordingButton = (Button)findViewById(R.id.buttonStartRecording);
-        _manageTracks = (Button)findViewById(R.id.buttonTracks);
+        _manageTracks = (ImageButton)findViewById(R.id.buttonTracks);
         
         _manageTracks.setOnClickListener(new OnClickListener() {
 			@Override
@@ -72,7 +74,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
 			}
 		});
         
-        ((Button)findViewById(R.id.buttonSettings)).setOnClickListener(new OnClickListener() {
+        ((ImageButton)findViewById(R.id.buttonSettings)).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				ButtonSettings_Clicked();
@@ -109,57 +111,32 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver  {
    
     private void ButtonStartRecording_Clicked()
     {
-    	startActivity(new Intent(this, NewTrackActivity.class));
+    	startActivityForResult(new Intent(this, NewTrackActivity.class), ActivityConstants.REQ_STARTRECORDING);
     }
-    //	startActivity(new Intent(this, TrackListActivity.class));
-//    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
-//    	alert.setTitle("lala");
-//    	final EditText edit = new EditText(this);
-//    	alert.setView(edit);
-//    	alert.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-//    	
-//    	alert.show();
-			
-//			@Override
-//			public void dismiss() {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void cancel() {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
+
+    /**
+     * Gets called on activity completion, if the activity was invoked using
+     * startActivityForResult
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) 
+    {
+    	super.onActivityResult(requestCode, resultCode, data);
     	
-  //}
+    	
+    	//Start recording?
+    	if(requestCode == ActivityConstants.REQ_STARTRECORDING &&
+    	   resultCode  == ActivityConstants.RES_OK)
+    	{
+    		
+    	}
+    	
+    }
 
 	@Override
-	public void LocationChanged(LocationIdentifier newLocation) {
-		/*Toast info = Toast.makeText(this, String.format("Location changed to long=%f lat=%f", 
-				newLocation.getLocation().getLongitude(), 
-				newLocation.getLocation().getLatitude()), Toast.LENGTH_SHORT);
-		
-		try
-		{
-			info.show();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}*/
-		
-		
-		
-		
+	public void LocationChanged(LocationIdentifier newLocation) 
+	{
+	
 		_labelLongitudeDegree.setText(
 				new Integer((int) newLocation.getLongitudeDegrees()).toString() + getResources().getString(R.string.degree_suffix));
 		_labelLongitudeMinutes.setText(

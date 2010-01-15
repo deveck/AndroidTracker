@@ -41,7 +41,9 @@ public class NewTrackActivity extends Activity {
 		_btnCancel.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v) 
+			{
+				setResult(ActivityConstants.RES_CANCEL);
 				finish();
 			}
 		});
@@ -77,6 +79,8 @@ public class NewTrackActivity extends Activity {
 		Environment.Instance().registerTrack(
 				new TrackInformation(_textTrackname.getText().toString(),
 						_textTracksummary.getText().toString()));
+		
+		setResult(ActivityConstants.RES_OK);
 		finish();
 	}
 

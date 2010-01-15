@@ -41,15 +41,13 @@ public class TrackInformation implements IGpsRecorder {
 		_statistics.AddLocation(newLocation);	
 	}
 	
-	//public void loadFile(){
-//		
-//	}
-	
-	public void save(){
-		//TODO: Store Track into File		
+	public void save()
+	{
+				
 	}
 	
-	public static void loadTrack(String name){
-		//TODO: Load Track from file
+	public static TrackInformation CreateFromTrackFile(String name)
+	{
+		return null;
 	}
 }

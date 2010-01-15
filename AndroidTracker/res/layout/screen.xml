@@ -2,9 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" 
-	android:layout_height="fill_parent"
-	 	
-	android:orientation="vertical" android:background="@drawable/background">
+	android:layout_height="fill_parent"	 	
+	android:orientation="vertical">
 	
 	<Button
 		android:id="@+id/buttonStartRecording"
@@ -229,56 +228,40 @@
 	</TableLayout>
 	
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" 
-	android:layout_height="fill_parent" 
-	android:orientation="horizontal">
-		<ImageButton 
-			android:id="@+id/btnMenueRecord" 
-			android:src="@drawable/menus_record"
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
-		</ImageButton>
-		<ImageButton 
-			android:id="@+id/btnMenueTracks" 
-			android:src="@drawable/menu_tracks"
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
-		</ImageButton>	
-		<ImageButton 
-			android:id="@+id/btnMenueSettings" 
-			android:src="@drawable/menu settings"
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
-		</ImageButton>
-	</LinearLayout>
-		
-	<TableLayout 
-		android:layout_height="fill_parent" 
+	<TableLayout
+		android:layout_height="fill_parent"
 		android:layout_width="fill_parent"
 		android:orientation="horizontal"
-		android:stretchColumns="0"
 		android:gravity="bottom"
+		android:stretchColumns="*"
 		>
 		
 		<TableRow>
-			<Button 
-				android:id="@+id/buttonTracks"
-				android:layout_height="wrap_content" 
-				android:text="Tracks" 
+			<ImageButton
+				android:id="@+id/btnMenueRecord"
+				android:src="@drawable/menus_record"
 				android:layout_width="wrap_content"
-				android:background="@android:drawable/btn_default_small">
-			</Button>
-			<Button 
-				android:id="@+id/buttonSettings"
-				android:layout_height="wrap_content" 
-				android:text="Settings" 
-				android:layout_width="wrap_content"
-				android:background="@android:drawable/btn_default_small"
-				android:minWidth="100sp"
+				android:layout_height="wrap_content"
+				android:scaleType="center"
 				>
-			</Button>
+			</ImageButton>
+			<ImageButton
+				android:id="@+id/buttonTracks"
+				android:src="@drawable/menu_tracks"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:scaleType="center"
+				>
+			</ImageButton>	
+			<ImageButton
+			 	android:id="@+id/buttonSettings"
+				android:src="@drawable/menu_settings"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:scaleType="center">
+			</ImageButton>
 		</TableRow>
 
 </TableLayout>
+
 </LinearLayout>

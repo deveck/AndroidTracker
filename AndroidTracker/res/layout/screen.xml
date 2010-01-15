@@ -2,21 +2,22 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" 
-	android:layout_height="fill_parent"
-	 	
-	android:orientation="vertical" android:background="@drawable/background">
+	android:layout_height="fill_parent"	 	
+	android:orientation="vertical" 
+	android:background="@drawable/background">
 	
-	<Button
+	<ImageView android:id="@+id/ImageLogo" 
+		android:layout_width="wrap_content" 
+		android:src="@drawable/logo"
+		android:layout_height="wrap_content" android:layout_gravity="top|center_horizontal">
+	</ImageView><ImageButton
 		android:id="@+id/buttonStartRecording"
-		android:text="@string/start_recording"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_margin="10px"
-		android:drawableLeft="@drawable/red_off"
-		android:background="@android:drawable/btn_default_small"
-		>		
+		android:background="@drawable/empty"
+		android:layout_height="40px"
+		android:layout_width="200px"
+		android:src="@drawable/start_recording_bt" android:scaleType="centerInside" android:adjustViewBounds="true">		
 	
-	</Button>
+	</ImageButton>
 	
 
 	<TableLayout
@@ -232,53 +233,33 @@
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent" 
-	android:orientation="horizontal">
+	android:orientation="horizontal"
+	android:background="@drawable/bar_bottom"
+	android:stretchColumns="*"	
+	 android:layout_gravity="bottom|center_horizontal">
 		<ImageButton 
 			android:id="@+id/btnMenueRecord" 
 			android:src="@drawable/menus_record"
 			android:layout_width="wrap_content" 
+			android:background="@drawable/empty"
 			android:layout_height="wrap_content">
 		</ImageButton>
 		<ImageButton 
-			android:id="@+id/btnMenueTracks" 
+			android:id="@+id/buttonTracks" 
 			android:src="@drawable/menu_tracks"
+			android:background="@drawable/empty"
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content">
 		</ImageButton>	
 		<ImageButton 
-			android:id="@+id/btnMenueSettings" 
-			android:src="@drawable/menu settings"
+			android:id="@+id/buttonSettings" 
+			android:src="@drawable/menu_settings"
+			android:background="@drawable/empty"
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content">
 		</ImageButton>
 	</LinearLayout>
 		
-	<TableLayout 
-		android:layout_height="fill_parent" 
-		android:layout_width="fill_parent"
-		android:orientation="horizontal"
-		android:stretchColumns="0"
-		android:gravity="bottom"
-		>
-		
-		<TableRow>
-			<Button 
-				android:id="@+id/buttonTracks"
-				android:layout_height="wrap_content" 
-				android:text="Tracks" 
-				android:layout_width="wrap_content"
-				android:background="@android:drawable/btn_default_small">
-			</Button>
-			<Button 
-				android:id="@+id/buttonSettings"
-				android:layout_height="wrap_content" 
-				android:text="Settings" 
-				android:layout_width="wrap_content"
-				android:background="@android:drawable/btn_default_small"
-				android:minWidth="100sp"
-				>
-			</Button>
-		</TableRow>
 
-</TableLayout>
+
 </LinearLayout>

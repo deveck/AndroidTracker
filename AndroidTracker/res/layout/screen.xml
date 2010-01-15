@@ -3,19 +3,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent"	 	
-	android:orientation="vertical">
+	android:orientation="vertical" 
+	android:background="@drawable/background">
 	
-	<Button
+	<ImageView android:id="@+id/ImageLogo" 
+		android:layout_width="wrap_content" 
+		android:src="@drawable/logo"
+		android:layout_height="wrap_content" android:layout_gravity="top|center_horizontal">
+	</ImageView><ImageButton
 		android:id="@+id/buttonStartRecording"
-		android:text="@string/start_recording"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_margin="10px"
-		android:drawableLeft="@drawable/red_off"
-		android:background="@android:drawable/btn_default_small"
-		>		
+		android:background="@drawable/empty"
+		android:layout_height="40px"
+		android:layout_width="200px"
+		android:src="@drawable/start_recording_bt" android:scaleType="centerInside" android:adjustViewBounds="true">		
 	
-	</Button>
+	</ImageButton>
 	
 
 	<TableLayout
@@ -263,5 +265,6 @@
 		</TableRow>
 
 </TableLayout>
+
 
 </LinearLayout>

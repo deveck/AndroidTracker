@@ -9,7 +9,8 @@
  		android:layout_width="fill_parent"
  		android:layout_height="wrap_content"
  		android:padding="10px"
- 		android:orientation="vertical">
+ 		android:orientation="vertical"
+ 		android:background="@drawable/background">
  		
  		<TextView android:id="@+id/labelTrackname"
  			android:layout_width="wrap_content"

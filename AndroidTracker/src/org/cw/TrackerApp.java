@@ -98,7 +98,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver, ICallbac
         setContentView(R.layout.screen);        
 
         _timer = new UiTimer(this);
-        _timer.setInterval(1000);
+        _timer.setInterval(200);
         _timer.setEnabled(true);
         _timer.execute();
         
@@ -178,9 +178,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver, ICallbac
        
    
     private void ButtonStartRecording_Clicked()
-    {
-    			
-    	
+    {   			
     	if(Environment.Instance().getCurrentTrack() == null)
     		startActivityForResult(new Intent(this, NewTrackActivity.class), ActivityConstants.REQ_STARTRECORDING);
     	else

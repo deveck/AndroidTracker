@@ -45,12 +45,16 @@ public class CrossingWaysConnection extends AsyncTask<Void, CallbackInfo, Void>
 	/**
 	 * _baseUrl + "ServiceName" e.g. VerifyCredentials
 	 */
-	private String _namespace = "http://www.crossingways.com/";
+	// Live:
+	//private String _namespace = "http://www.crossingways.com/";
+	// Developement
+	private String _namespace = "http://crossingways.graz.interad.at:8080/";
 	
 	/**
 	 * Url of the ASP Webservice
 	 */
-	private String _serviceUrl = "http://www.crossingways.com/services/livetracking.asmx";
+	//private String _serviceUrl = "http://www.crossingways.com/services/livetracking.asmx";
+	private String _serviceUrl = "http://crossingways.graz.interad.at:8080/services/livetracking.asmx";
 	
 	/**
 	 * Http Transport layer

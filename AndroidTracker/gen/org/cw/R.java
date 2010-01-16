@@ -51,9 +51,9 @@ public final class R {
     }
     public static final class id {
         public static final int ImageLogo=0x7f070008;
-        public static final int btnMenueRecord=0x7f070023;
         public static final int buttonOk=0x7f07002e;
         public static final int buttonPauseRecording=0x7f07000a;
+        public static final int buttonRecord=0x7f070023;
         public static final int buttonSettings=0x7f070025;
         public static final int buttonStartLiveTracking=0x7f070015;
         public static final int buttonStartRecording=0x7f070009;

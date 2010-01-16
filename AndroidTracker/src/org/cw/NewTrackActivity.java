@@ -1,5 +1,8 @@
 package org.cw;
 
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
+
 import org.cw.dataitems.TrackFile;
 import org.cw.dataitems.TrackInformation;
 
@@ -24,6 +27,8 @@ public class NewTrackActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.newtrack);
+		
+		
 
 		_textTrackname = (EditText) findViewById(R.id.textTrackname);
 		_textTracksummary = (EditText) findViewById(R.id.textTrackdescription);
@@ -66,6 +71,15 @@ public class NewTrackActivity extends Activity {
 				finish();
 			}
 		});
+		
+		
+		// Always set a default name, so that it is easy to start a new track, 
+		// especially if you do not want to type...
+		//SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");		
+		//Date currentTime_1 = new Date();		
+		//_textTrackname.setText("Track on " +  formatter.format(currentTime_1));
+		_textTrackname.setText("New Track");
+		_btnOK.setEnabled(true);
 	}
 
 	private void CreateNewTrack() 

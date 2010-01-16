@@ -1,6 +1,7 @@
 package org.cw;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -55,6 +56,20 @@ public class SettingsActivity extends Activity
 			}
 		});
         
+        ((ImageButton)findViewById(R.id.buttonRecord)).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ButtonRecord_Clicked();
+			}
+		});
+        
+        ((ImageButton)findViewById(R.id.buttonTracks)).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ButtonTracks_Clicked();
+			}
+		});             
+        
         _buttonVerifyCredentials.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -84,6 +99,17 @@ public class SettingsActivity extends Activity
 			_buttonVerifyCredentials.setImageDrawable(getResources().getDrawable(R.drawable.cross));
 		}
 	}
+	
+
+    private void ButtonRecord_Clicked()
+    {
+		setResult(ActivityConstants.RES_NOTHINGTODO);
+		finish();
+	}    
+    private void ButtonTracks_Clicked()
+    {
+    	startActivityForResult(new Intent(this, TrackListActivity.class), ActivityConstants.REQ_TRACKMANAGEMENT);
+	}    
 	
 	/** Called on save button click,
 	 * Save all settings here, if they are verified

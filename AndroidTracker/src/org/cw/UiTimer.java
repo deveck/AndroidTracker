@@ -76,7 +76,7 @@ public class UiTimer extends AsyncTask<Void, Void, Void>
 	@Override
 	protected Void doInBackground(Void... arg0) 
 	{
-		int maxThreadSleep = 100;
+		int maxThreadSleep = 10;
 		long lastCall = System.nanoTime() /1000 /1000;
 		
 		try 
@@ -92,6 +92,7 @@ public class UiTimer extends AsyncTask<Void, Void, Void>
 						_uiLock.lock();
 						publishProgress((Void[])null);
 						_uiCond.await();
+						lastCall = System.nanoTime() /1000 /1000;
 					}
 					finally
 					{

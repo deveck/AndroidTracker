@@ -70,4 +70,41 @@
 		</LinearLayout>
 		</TableRow>
 	</TableLayout>
+	
+	
+	<TableLayout
+		android:layout_height="fill_parent"
+		android:layout_width="fill_parent"
+		android:orientation="horizontal"
+		android:gravity="bottom"
+		android:stretchColumns="*"
+		>
+		
+		<TableRow>
+			<ImageButton
+				android:id="@+id/buttonRecord"
+				android:src="@drawable/menus_record"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:scaleType="center"
+				>
+			</ImageButton>
+			<ImageButton
+				android:id="@+id/buttonTracks"
+				android:src="@drawable/menu_tracks"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:scaleType="center"
+				>
+			</ImageButton>	
+			<ImageButton
+			 	android:id="@+id/buttonSettings"
+				android:src="@drawable/menu_settings"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:scaleType="center">
+			</ImageButton>
+		</TableRow>
+	</TableLayout>	
+	
 </LinearLayout>

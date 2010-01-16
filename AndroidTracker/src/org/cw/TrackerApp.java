@@ -166,7 +166,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver, ICallbac
     
     private void ButtonTracks_Clicked()
     {
-    	startActivity(new Intent(this, TrackListActivity.class));
+    	startActivityForResult(new Intent(this, TrackListActivity.class), ActivityConstants.REQ_TRACKMANAGEMENT);
 	}
         
     private void ButtonSettings_Clicked()
@@ -249,6 +249,11 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver, ICallbac
     	//Start recording?
     	if(requestCode == ActivityConstants.REQ_STARTRECORDING &&
     	   resultCode  == ActivityConstants.RES_OK)
+    	{
+    		ContinueTrackRecording();
+    	}
+    	else if(requestCode == ActivityConstants.REQ_TRACKMANAGEMENT &&
+    			resultCode == ActivityConstants.RES_OK)
     	{
     		ContinueTrackRecording();
     	}

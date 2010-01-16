@@ -1,5 +1,9 @@
 package org.cw;
 
+import java.util.Vector;
+
+import org.cw.dataitems.TrackFile;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,9 +22,7 @@ public class TrackListActivity extends Activity {
 	private Button _buttonUpLoad;
 	private Button _buttonDelete;
 	private Button _buttonCancel;
-		
-	//TODO: changes on layout required! Max size an scrolling of list view
-	String[] test = {"1","2","3","4", "5", "6", "7", "8"};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -57,9 +59,7 @@ public class TrackListActivity extends Activity {
 			alert.show();
 		}
 		
-		//TODO: bring in real data
-		_list.setAdapter(new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_multiple_choice, test));
+		RebuildTrackList();
 		
 		_buttonLoad.setOnClickListener(new OnClickListener() {
 			
@@ -79,12 +79,10 @@ public class TrackListActivity extends Activity {
 			}
 		});
 		
-		_buttonDelete.setOnClickListener(new OnClickListener() {
-			
+		_buttonDelete.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				// TODO DELETE track
-				
+				ButtonDelete_Clicked();				
 			}
 		});
 		
@@ -92,10 +90,55 @@ public class TrackListActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				setResult(ActivityConstants.RES_NOTHINGTODO);
 				finish();
 			}
 		});
 
+	}
+	
+	/** After warning, deletes the selected Track from disk */
+	private void ButtonDelete_Clicked()
+	{
+		if(_list.getCheckedItemPosition() == ListView.INVALID_POSITION)
+			return;
+		
+		final TrackFile selectedTrackFile = (TrackFile)_list.getItemAtPosition(_list.getCheckedItemPosition());
+				
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		alert.setTitle("Removal");
+		alert.setMessage("Really remove "
+				+ selectedTrackFile.toString()
+				+ " permanently?");
+		alert.setPositiveButton("YES",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) 
+					{
+						selectedTrackFile.DeleteMe();
+						RebuildTrackList();
+					}
+				});
+		alert.show();
+	}
+	
+	/** Relists the files from disk and adds them to the list */
+	private void RebuildTrackList()
+	{
+		Vector<TrackFile> files = new Vector<TrackFile>();
+		
+		for(String file : fileList())
+		{
+			if(TrackFile.IsTrackFile(file))
+			{
+				TrackFile myFile = new TrackFile(this, file);
+				files.add(myFile);
+			}
+		}
+		
+		_list.setAdapter(new ArrayAdapter<TrackFile>(this,
+				android.R.layout.simple_list_item_multiple_choice, files.toArray(new TrackFile[0])));
+		
 	}
 
 }

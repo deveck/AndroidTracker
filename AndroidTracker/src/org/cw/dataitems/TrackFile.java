@@ -1,5 +1,8 @@
 package org.cw.dataitems;
 
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+
 import android.content.Context;
 
 /**
@@ -18,6 +21,16 @@ import android.content.Context;
  */
 public class TrackFile 
 {
+	
+	public static final boolean fileExists(Context ctx, String filename){
+		try {
+			ctx.openFileInput(filename);
+		} catch (FileNotFoundException e) {
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * Checks if the specified file is a valid track file
 	 * @param filename

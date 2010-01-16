@@ -24,6 +24,12 @@ public class TrackListActivity extends Activity {
 	private Button _buttonDelete;
 	private Button _buttonCancel;
 
+	/**
+	 * Stores all the available Tracks and switches view mode 
+	 * if an action on the entry is running
+	 */
+	private TrackListDataAdapter _listAdapter = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -162,6 +168,7 @@ public class TrackListActivity extends Activity {
 			}
 		}
 		
+		_listAdapter = new TrackListDataAdapter(this, files);
 		_list.setAdapter(new ArrayAdapter<TrackFile>(this,
 				android.R.layout.simple_list_item_multiple_choice, files.toArray(new TrackFile[0])));
 		

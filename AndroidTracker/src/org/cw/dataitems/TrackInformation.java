@@ -17,16 +17,20 @@ public class TrackInformation implements IGpsRecorder {
 	private File _stat;
 	private Date _creationdate;
 	private TrackStatistics _statistics;
+	private TrackTime _trackTime;
 	
 	private TrackInformation(){
 		_locations = new Vector<LocationIdentifier>();
 		_creationdate = new Date();
+		_trackTime = new TrackTime(0);
+		
 	}
 	public TrackInformation(String name, String summary){
 		this();
 		_summary = summary;
 		_name = name;
 		_statistics = new TrackStatistics(_name);
+		_trackTime = new TrackTime(0);
 	}
 	
 	public String getName(){ return _name; }
@@ -34,6 +38,7 @@ public class TrackInformation implements IGpsRecorder {
 	public Date getCreationDate(){ return _creationdate; }
 	public Vector<LocationIdentifier> getLocations(){ return _locations; }
 	public TrackStatistics getStatistics(){ return _statistics; }
+	public TrackTime getTrackTime(){ return _trackTime;}
 	
 	@Override
 	public void AddLocation(LocationIdentifier newLocation) {

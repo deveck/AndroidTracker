@@ -12,18 +12,42 @@
 		android:layout_height="wrap_content" android:layout_gravity="top|center_horizontal">
 	</ImageView>
 	
-	<ImageButton
-		android:id="@+id/buttonStartRecording"
-		android:background="@drawable/empty"
-		android:layout_height="40sp"
-		android:layout_width="200sp"
-		android:src="@drawable/start_recording_bt" 
-		android:scaleType="fitXY"
-		android:adjustViewBounds="true">		
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+	>
+		<ImageButton
+			android:id="@+id/buttonStartRecording"
+			android:background="@drawable/empty"
+			android:layout_height="40sp"
+			android:layout_width="wrap_content"
+			android:src="@drawable/start_recording_bt" 
+			android:scaleType="fitXY"
+			android:adjustViewBounds="true"
+		/>
+		<ImageButton
+			android:id="@+id/buttonPauseRecording"
+			android:layout_width="wrap_content"
+			android:layout_height="40sp"
+			android:background="@drawable/empty"
+			android:src="@drawable/pause_pause" 
+			android:scaleType="fitXY"
+			android:adjustViewBounds="true"
+			android:visibility="invisible"
+		/>		
+		<ImageButton
+			android:id="@+id/buttonStopRecording"
+			android:layout_width="wrap_content"
+			android:layout_height="40sp"
+			android:background="@drawable/empty"
+			android:src="@drawable/stop_bt" 
+			android:scaleType="fitXY"
+			android:adjustViewBounds="true"
+			android:visibility="invisible" 
+		/>		
+	</LinearLayout>
 	
-	</ImageButton>
-	
-
 	<TableLayout
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"

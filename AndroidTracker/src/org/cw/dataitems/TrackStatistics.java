@@ -43,5 +43,6 @@ public class TrackStatistics implements IGpsRecorder {
 			_averagespeed = _distance / _timems * 3600.0;
 		}
 		_numlocations++;
+		_lastlocation = newLocation;
 	}
 }

@@ -71,6 +71,7 @@ public class TrackFile
 	 */
 	public void DeleteMe()
 	{
+		File a;
 		_ctx.deleteFile(_trackfilename);
 		_ctx.deleteFile(getStatFilename());
 	}

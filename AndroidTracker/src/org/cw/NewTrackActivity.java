@@ -72,7 +72,8 @@ public class NewTrackActivity extends Activity {
 		}
 	}
 
-	private void CreateNewTrack() {
+	private void CreateNewTrack() 
+	{
 		if (_textTrackname.getText().length() == 0)
 			return;
 		if (_textTracksummary.getText().length() == 0)

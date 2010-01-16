@@ -86,8 +86,7 @@ public class TrackListActivity extends Activity {
 			}
 		});
 		
-		_buttonCancel.setOnClickListener(new OnClickListener() {
-			
+		_buttonCancel.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				setResult(ActivityConstants.RES_NOTHINGTODO);
@@ -97,7 +96,7 @@ public class TrackListActivity extends Activity {
 
 	}
 	
-	/** After warning, deletes the selected Track from disk */
+	/** After warning, deletes the selected Track  from disk */
 	private void ButtonDelete_Clicked()
 	{
 		if(_list.getCheckedItemPosition() == ListView.INVALID_POSITION)

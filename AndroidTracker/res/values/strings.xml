@@ -33,4 +33,6 @@
 <string name="textDelete">Delete</string>
 <string name="tracklist">Track List</string>
 <string name="newtrack">New track registration</string>
+<string name="textCreate">Create</string>
+<string name="textOverride">Override</string>
 </resources>

@@ -13,8 +13,7 @@ public class TrackInformation implements IGpsRecorder {
 	private String _name;
 	private String _summary;
 	private Vector<LocationIdentifier> _locations;
-	private File _gpx;
-	private File _stat;
+	private TrackFile _data;
 	private Date _creationdate;
 	private TrackStatistics _statistics;
 	private TrackTime _trackTime;
@@ -25,12 +24,13 @@ public class TrackInformation implements IGpsRecorder {
 		_trackTime = new TrackTime(0);
 		
 	}
-	public TrackInformation(String name, String summary){
+	public TrackInformation(TrackFile data, String name, String summary){
 		this();
 		_summary = summary;
 		_name = name;
 		_statistics = new TrackStatistics(_name);
 		_trackTime = new TrackTime(0);
+		_data = data;
 	}
 	
 	public String getName(){ return _name; }

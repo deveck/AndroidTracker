@@ -44,7 +44,8 @@
 		<Button android:id="@+id/buttonTrackOk"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:text="@string/textOK"
+				android:text="@string/textCreate"
+				android:enabled="false"
 				android:layout_span="1" />
 
 		<Button android:id="@+id/buttonTrackCancel"

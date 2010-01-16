@@ -122,9 +122,11 @@ public final class R {
         public static final int speed=0x7f05000b;
         public static final int start_recording=0x7f050016;
         public static final int textCancel=0x7f05001a;
+        public static final int textCreate=0x7f050021;
         public static final int textDelete=0x7f05001e;
         public static final int textLoad=0x7f05001c;
         public static final int textOK=0x7f050019;
+        public static final int textOverride=0x7f050022;
         public static final int textTrackList=0x7f05001b;
         public static final int textTrackdescription=0x7f050018;
         public static final int textUpLoad=0x7f05001d;

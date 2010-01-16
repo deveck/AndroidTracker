@@ -135,7 +135,7 @@ public class TrackListActivity extends Activity {
 		alert.setMessage("Really remove "
 				+ selectedTrackFile.toString()
 				+ " permanently?");
-		alert.setPositiveButton("YES",
+		alert.setPositiveButton("Yes, remove",
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) 
@@ -144,6 +144,7 @@ public class TrackListActivity extends Activity {
 						RebuildTrackList();
 					}
 				});
+		alert.setPositiveButton("No", null);
 		alert.show();
 	}
 	

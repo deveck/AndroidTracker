@@ -3,6 +3,7 @@ package org.cw;
 import java.util.Vector;
 
 import org.cw.dataitems.TrackFile;
+import org.cw.dataitems.TrackInformation;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -65,8 +66,7 @@ public class TrackListActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO LOAD TRACK for resume
-				finish();
+				ButtonLoad_Clicked();
 			}
 		});
 		
@@ -94,6 +94,32 @@ public class TrackListActivity extends Activity {
 			}
 		});
 
+	}
+	
+	/** Load the selected track back to resume */
+	private void ButtonLoad_Clicked()
+	{
+		if(_list.getCheckedItemPosition() == ListView.INVALID_POSITION)
+			return;
+		
+		TrackFile fileToLoad = (TrackFile)_list.getItemAtPosition(_list.getCheckedItemPosition());
+		
+		TrackInformation trackInformation = TrackInformation.CreateFromTrackFile(fileToLoad);
+		
+		if(trackInformation == null)
+		{
+			Environment.Instance().AlertBuilderInstance().ShowInfoBox(
+					"Unknown error loading track information file...", 
+					"Error", 
+					"OK");
+		}
+		else
+		{
+			Environment.Instance().registerTrack(trackInformation);
+			
+			setResult(ActivityConstants.RES_OK);
+			finish();
+		}
 	}
 	
 	/** After warning, deletes the selected Track  from disk */

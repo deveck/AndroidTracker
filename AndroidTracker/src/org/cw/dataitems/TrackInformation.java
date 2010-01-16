@@ -3,23 +3,30 @@ package org.cw.dataitems;
 import org.cw.CWException;
 import org.cw.gps.IGpsRecorder;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.StringWriter;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.Date;
 import java.util.Vector;
 
 import org.cw.gps.LocationIdentifier;
 import org.kobjects.isodate.IsoDate;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
+import android.location.Location;
 import android.util.Xml;
 
 public class TrackInformation implements IGpsRecorder {
 	
-	public static TrackInformation CreateFromTrackFile(String name)
+	private static final int MAX_UNSAVED_TRACKPOINTS = 1;
+	
+	public static TrackInformation CreateFromTrackFile(TrackFile file)
 	{
-		return null;
+		return new TrackInformation(file, "");
 	}
 	
 	private String _name;
@@ -29,6 +36,8 @@ public class TrackInformation implements IGpsRecorder {
 	private Date _creationdate;
 	private TrackStatistics _statistics;
 	private TrackTime _trackTime;
+	
+	private int _unsavedTrackPoints = 0;
 	
 	private TrackInformation(){
 		_locations = new Vector<LocationIdentifier>();
@@ -44,6 +53,12 @@ public class TrackInformation implements IGpsRecorder {
 		_statistics = new TrackStatistics(_name);
 		_trackTime = new TrackTime(0);
 		_data = file;
+		
+		if(file.Exists())
+		{
+			//Load the existing data
+			load();
+		}
 	}
 	
 	public String getName(){ return _name; }
@@ -58,6 +73,11 @@ public class TrackInformation implements IGpsRecorder {
 	public void AddLocation(LocationIdentifier newLocation) {
 		_locations.add(newLocation);
 		_statistics.AddLocation(newLocation);	
+		
+		_unsavedTrackPoints ++;
+		
+		if(_unsavedTrackPoints >= MAX_UNSAVED_TRACKPOINTS)
+			save();
 	}
 	
 	/**
@@ -66,13 +86,16 @@ public class TrackInformation implements IGpsRecorder {
 	 * .stat for statistics
 	 * @throws CWException 
 	 */
-	public void save() throws CWException
+	public void save() 
 	{
 		XmlSerializer trackXmlOutput = Xml.newSerializer();
-		StringWriter trackOutput = new StringWriter();
+			
 		
 		try
 		{
+			OutputStream output = _data.openOuputTrackFile();
+			Writer trackOutput = new OutputStreamWriter(output, "UTF-8");
+			
 			trackXmlOutput.setOutput(trackOutput);
 			trackXmlOutput.startDocument("UTF-8", true);
 			trackXmlOutput.startTag("", "gpx");
@@ -87,16 +110,19 @@ public class TrackInformation implements IGpsRecorder {
 			
 			trackXmlOutput.endTag("", "gpx");
 			
+			trackOutput.flush();
+			output.flush();
+			trackOutput.close();
+			output.close();
 			
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			throw new CWException(e.getMessage());
+			new CWException(e.getMessage()).ShowAlertDialog();
 		}
-		 
 	}
-	
+
 	private void SerializeMetadata(XmlSerializer xmlOutput) throws 
 		IllegalArgumentException, 
 		IllegalStateException, 
@@ -182,5 +208,129 @@ public class TrackInformation implements IGpsRecorder {
 		xmlOutput.endTag("", "trkpt");
 	}
 	
+
+	/**
+	 * Loads the track points saved in the xml file
+	 */
+	public void load()
+	{ 
+		try 
+		{
+			XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser();
+			xmlParser.setInput(_data.openInputTrackFile(), "UTF-8");
+			
+			//Parse gpx start Tag
+			int xmlLevel = 0;
+			if(xmlParser.nextTag() != XmlPullParser.START_TAG)
+				throw new XmlPullParserException("Unexpected tag");
+			xmlLevel++;
+			
+			//Once the Root tag is closed, nothing more can be in the xml file
+			while(xmlLevel > 0)
+			{
+				int tagResult = xmlParser.nextTag();
+				if(tagResult == XmlPullParser.START_TAG)
+					xmlLevel++;
+				else// if(tagResult == XmlPullParser.END_TAG)
+					xmlLevel--;
+				
+				if(xmlLevel == 2 && xmlParser.getName().equals("metadata"))
+				{
+					ParseMetadata(xmlParser);
+					//metadata end tag is consumed inside
+					xmlLevel--;
+				}
+				else if(xmlLevel == 2 && xmlParser.getName().equals("trk"))
+				{
+					ParseTrackPoints(xmlParser);
+					//trk end tag is consumed inside
+					xmlLevel--;
+				}
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			new CWException(e.getMessage()).ShowAlertDialog();
+		}
+		
+	}
 	
+	private void ParseMetadata(XmlPullParser xmlParser) throws XmlPullParserException, IOException
+	{
+		//Start Tag is parsed outside
+		
+		while(xmlParser.nextTag() == XmlPullParser.START_TAG)
+		{
+			
+			
+			if(xmlParser.getName().equals("desc"))
+				_summary = xmlParser.nextText();
+			else if(xmlParser.getName().equals("name"))
+				_name = xmlParser.nextText();	
+			else if(xmlParser.getName().equals("time"))
+				_creationdate = IsoDate.stringToDate(xmlParser.nextText(), IsoDate.DATE_TIME);
+			else
+				xmlParser.nextText();
+			//Bounds tag is ignored because the max and min values get reconstructed from the stat file
+			
+			//Parse end tags
+			//if(xmlParser.nextTag() != XmlPullParser.END_TAG)
+			//	throw new XmlPullParserException("Unexpected tag");
+		}
+	}	
+	
+	private void ParseTrackPoints(XmlPullParser xmlParser) throws XmlPullParserException, IOException
+	{
+		//Start Tag is parsed outside
+		
+		while(xmlParser.nextTag() == XmlPullParser.START_TAG)
+		{
+			if(xmlParser.getName().equals("name"))
+				_name = xmlParser.nextText();		
+			else if(xmlParser.getName().equals("trkpt"))
+				ParseTrackPoint(xmlParser);
+			else if(xmlParser.getName().equals("trkseg"))
+			{
+				System.out.println("huhu");
+				//Do Nothing!
+			}
+			else
+				xmlParser.nextText();
+			
+			//Parse end tags
+			//if(xmlParser.nextTag() != XmlPullParser.END_TAG)
+			//	throw new XmlPullParserException("Unexpected tag");
+		}
+	}
+	
+	private void ParseTrackPoint(XmlPullParser xmlParser) throws XmlPullParserException, IOException
+	{
+		//Start Tag is parsed outside
+		double latitude = Double.parseDouble(xmlParser.getAttributeValue("", "lat"));
+		double longitude = Double.parseDouble(xmlParser.getAttributeValue("", "lon"));
+		double altitude = 0;
+		Date time = new Date();
+		
+		while(xmlParser.nextTag() == XmlPullParser.START_TAG)
+		{
+			if(xmlParser.getName().equals("ele"))
+				altitude = Double.parseDouble(xmlParser.nextText());		
+			else if(xmlParser.getName().equals("time"))
+				time = IsoDate.stringToDate(xmlParser.nextText(), IsoDate.DATE_TIME);
+			else
+				xmlParser.nextTag();
+			//Parse end tags
+			//if(xmlParser.nextTag() != XmlPullParser.END_TAG)
+			//	throw new XmlPullParserException("Unexpected tag");
+		}
+		
+		Location newLocation = new Location("gps");
+		newLocation.setAltitude(altitude);
+		newLocation.setLatitude(latitude);
+		newLocation.setLongitude(longitude);
+		newLocation.setTime(time.getTime());
+		_locations.add(new LocationIdentifier(newLocation));
+		
+	}
 }

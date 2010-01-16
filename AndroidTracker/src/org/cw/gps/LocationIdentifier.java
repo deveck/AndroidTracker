@@ -14,16 +14,11 @@ public class LocationIdentifier
 {
 	private Location _location;
 	private float _speed;
-	private double _height;
 	private Date _dateTime;
 	
 	public LocationIdentifier(Location location)
 	{
 		_location = location;
-		
-		//To be tested
-		_height = location.getAltitude();
-		
 		_dateTime = new Date(location.getTime()); 
 	}
 

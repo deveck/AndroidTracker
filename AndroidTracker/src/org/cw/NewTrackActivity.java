@@ -4,20 +4,13 @@ import org.cw.dataitems.TrackFile;
 import org.cw.dataitems.TrackInformation;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.method.KeyListener;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
 public class NewTrackActivity extends Activity {
 
@@ -51,7 +44,7 @@ public class NewTrackActivity extends Activity {
 				}
 				else
 					_btnOK.setEnabled(false);
-				return true;
+				return false;
 			}
 		});
 		
@@ -81,8 +74,14 @@ public class NewTrackActivity extends Activity {
 			return;
 		if (_textTracksummary.getText().length() == 0)
 			_textTracksummary.setText("No further information ...");
+		
+		TrackFile trackFile = TrackFile.CreateFromName(this, _textTrackname.getText().toString());
+		
+		if(trackFile.Exists())
+			trackFile.DeleteMe();
+		
 		Environment.Instance().registerTrack(
-				new TrackInformation(new TrackFile(this.getBaseContext(), _textTrackname.getText().toString()), _textTrackname.getText().toString(),
+				new TrackInformation(trackFile,
 						_textTracksummary.getText().toString()));
 		
 		setResult(ActivityConstants.RES_OK);

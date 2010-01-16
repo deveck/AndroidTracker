@@ -6,12 +6,8 @@ import org.cw.gps.DefaultGPSProvider;
 import org.cw.gps.ILocationProvider;
 import org.cw.settings.SettingsEnvironment;
 import org.cw.utils.AlertBuilder;
-//import org.cw.utils.StatisticItem;
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.widget.TextView;
+
 
 /**
  * Defines the environment for the tracker application 

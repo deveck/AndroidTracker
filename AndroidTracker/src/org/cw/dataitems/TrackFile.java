@@ -1,7 +1,14 @@
 package org.cw.dataitems;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import android.content.Context;
 
 /**
@@ -21,13 +28,13 @@ import android.content.Context;
 public class TrackFile 
 {
 	
+	public static final TrackFile CreateFromName(Context ctx, String trackName)
+	{
+		return new TrackFile(ctx, "gpxtrack_" + trackName + ".xml");
+	}
+	
 	public static final boolean fileExists(Context ctx, String trackname){
-		try {
-			ctx.openFileInput(trackname + ".xml");
-		} catch (FileNotFoundException e) {
-			return false;
-		}
-		return true;
+		return CreateFromName(ctx, trackname).Exists();
 	}
 	
 	/**
@@ -78,14 +85,39 @@ public class TrackFile
 		return _trackfilename.substring(0, _trackfilename.length() - (".xml").length()) + ".stat";
 	}
 	
+	public OutputStream openOuputTrackFile() throws FileNotFoundException, UnsupportedEncodingException
+	{
+		FileOutputStream output = _ctx.openFileOutput(_trackfilename, Context.MODE_PRIVATE);
+		return output;
+	}
+	
+	public InputStream openInputTrackFile() throws FileNotFoundException
+	{
+		FileInputStream input = _ctx.openFileInput(_trackfilename);
+		return input;
+	}
+	
 	/**
 	 * Deletes the file from disk
 	 */
 	public void DeleteMe()
 	{
-		File a;
 		_ctx.deleteFile(_trackfilename);
 		_ctx.deleteFile(getStatFilename());
+	}
+	
+	/**
+	 * Checks if the Track file already exists on disk
+	 * @return
+	 */
+	public boolean Exists()
+	{
+		try {
+			_ctx.openFileInput(_trackfilename);
+		} catch (FileNotFoundException e) {
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
@@ -93,7 +125,7 @@ public class TrackFile
 	{
 		int prefixLength = ("gpxtrack_").length();
 		int suffixLength = (".xml").length();
-		return _trackfilename.substring(prefixLength, _trackfilename.length() - prefixLength - suffixLength);
+		return _trackfilename.substring(prefixLength, _trackfilename.length() - suffixLength);
 	}
 	
 }

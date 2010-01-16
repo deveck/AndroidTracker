@@ -3,9 +3,6 @@ package org.cw;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import org.cw.connection.CallbackInfo;
-
 import android.os.AsyncTask;
 
 /**
@@ -105,7 +102,6 @@ public class UiTimer extends AsyncTask<Void, Void, Void>
 		} 
 		catch (InterruptedException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

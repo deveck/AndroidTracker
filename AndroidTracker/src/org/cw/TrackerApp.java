@@ -178,9 +178,7 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver, ICallbac
        
    
     private void ButtonStartRecording_Clicked()
-    {
-    			
-    	
+    {   			
     	if(Environment.Instance().getCurrentTrack() == null)
     		startActivityForResult(new Intent(this, NewTrackActivity.class), ActivityConstants.REQ_STARTRECORDING);
     	else

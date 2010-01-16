@@ -8,12 +8,14 @@ import org.cw.dataitems.TrackInformation;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class TrackListActivity extends Activity {
@@ -36,6 +38,22 @@ public class TrackListActivity extends Activity {
 		_buttonUpLoad = (Button)findViewById(R.id.buttonTrackListUpLoad);
 		_buttonDelete = (Button)findViewById(R.id.buttonTrackListDelete);
 		_buttonCancel = (Button)findViewById(R.id.buttonTrackListCancel);
+		
+        
+        ((ImageButton)findViewById(R.id.buttonRecord)).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ButtonRecord_Clicked();
+			}
+		});
+        
+        ((ImageButton)findViewById(R.id.buttonSettings)).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ButtonSettings_Clicked();
+			}
+		});            
+        		
 		
 		// store current track first?
 		if (Environment.Instance().getCurrentTrack() != null) {
@@ -121,6 +139,16 @@ public class TrackListActivity extends Activity {
 			finish();
 		}
 	}
+	
+    private void ButtonSettings_Clicked()
+    {
+    	startActivity(new Intent(this, SettingsActivity.class));
+    }
+    private void ButtonRecord_Clicked()
+    {
+		setResult(ActivityConstants.RES_NOTHINGTODO);
+		finish();
+	}   	
 	
 	/** After warning, deletes the selected Track  from disk */
 	private void ButtonDelete_Clicked()

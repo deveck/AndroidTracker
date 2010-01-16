@@ -144,7 +144,7 @@ public class TrackListActivity extends Activity {
 						RebuildTrackList();
 					}
 				});
-		alert.setPositiveButton("No", null);
+		alert.setNegativeButton("No", null);
 		alert.show();
 	}
 	

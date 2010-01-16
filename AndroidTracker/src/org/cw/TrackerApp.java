@@ -1,5 +1,9 @@
 package org.cw;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+
 import org.cw.gps.IGpsStatusReceiver;
 import org.cw.gps.LiveTrackingUpdater;
 import org.cw.gps.LocationIdentifier;
@@ -175,6 +179,8 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver, ICallbac
    
     private void ButtonStartRecording_Clicked()
     {
+    			
+    	
     	if(Environment.Instance().getCurrentTrack() == null)
     		startActivityForResult(new Intent(this, NewTrackActivity.class), ActivityConstants.REQ_STARTRECORDING);
     	else

@@ -110,9 +110,10 @@ public class TrackInformation implements IGpsRecorder {
 			
 			trackXmlOutput.endTag("", "gpx");
 			
+			trackXmlOutput.flush();
 			trackOutput.flush();
-			output.flush();
 			trackOutput.close();
+			output.flush();			
 			output.close();
 			
 		}

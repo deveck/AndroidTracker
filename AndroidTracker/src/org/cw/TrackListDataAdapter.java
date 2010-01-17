@@ -8,6 +8,8 @@ import org.cw.dataitems.TrackFile;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.AnimationDrawable;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,7 @@ public class TrackListDataAdapter extends ArrayAdapter<TrackFile>
 	public void setViewType(int position, ViewTypeEnum newViewType)
 	{
 		_itemViews.put(position, newViewType);
+		super.notifyDataSetChanged();
 	}
 	
 	
@@ -65,7 +68,7 @@ public class TrackListDataAdapter extends ArrayAdapter<TrackFile>
 
 
 		TextView label = (TextView)row.getTag(R.id.label);
-		ImageView icon = (ImageView)row.getTag(R.id.icon);
+		final ImageView icon = (ImageView)row.getTag(R.id.icon);
 		
 		if(_itemViews.get(position) != null && _itemViews.get(position) == ViewTypeEnum.Working)
 			icon.setImageResource(R.anim.working);
@@ -74,8 +77,52 @@ public class TrackListDataAdapter extends ArrayAdapter<TrackFile>
 
 		label.setText(getItem(position).toString());
 		
+		
+		//Hack the planet!!
+		//
+		//according to developer forum, the animation cannot be started immediately,
+		//so we just add a delay and execute the start in the main thread
+		new AsyncTask<Void, Void, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				publishProgress();
+				
+				return null;
+			}
+			
+			@Override
+			protected void onProgressUpdate(Void... values) {
+				((AnimationDrawable)icon.getDrawable()).start();
+			}
+			
+		}.execute();
+		
+		
 		return row;		
 	}
 	
 	
+	@Override
+	public int getItemViewType(int position) {
+		
+		if(_itemViews.get(position) != null && _itemViews.get(position) == ViewTypeEnum.Working)
+			return 1;
+		else
+			return 0;
+	}
+
+	@Override
+	public int getViewTypeCount() 
+	{
+		return 2;
+	}
+
+
 }

@@ -4,11 +4,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.nio.CharBuffer;
+
 import android.content.Context;
 
 /**
@@ -126,6 +131,31 @@ public class TrackFile
 		int prefixLength = ("gpxtrack_").length();
 		int suffixLength = (".xml").length();
 		return _trackfilename.substring(prefixLength, _trackfilename.length() - suffixLength);
+	}
+
+	/** Currently the file is directly saved as gpx file, 
+	 *  so we only need to read the file data
+	 * @return
+	 * @throws IOException 
+	 */
+	public String getGPXData() throws IOException 
+	{
+		InputStreamReader rdr = new InputStreamReader(openInputTrackFile());
+		
+		StringBuffer strBuffer = new StringBuffer();
+		
+		char[] buffer = new char[4096];
+		int read = -1;
+		do
+		{
+			read = rdr.read(buffer, 0, buffer.length);
+			
+			if(read > 0)
+				strBuffer.append(buffer, 0, read);
+			
+		}while(read > -1);
+		
+		return strBuffer.toString();
 	}
 	
 }

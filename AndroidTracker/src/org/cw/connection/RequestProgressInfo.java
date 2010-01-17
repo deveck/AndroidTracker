@@ -65,6 +65,8 @@ public class RequestProgressInfo
 	public Boolean getRequeue(){ return _requeue; }
 	public void setRequeue(Boolean value){ _requeue = value; }
 	
+	public StatusTypeEnum getStatus(){return _status;}
+	
 	protected RequestProgressInfo()
 	{
 		

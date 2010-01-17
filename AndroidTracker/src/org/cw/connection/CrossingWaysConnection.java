@@ -42,13 +42,14 @@ import android.os.AsyncTask;
  */
 public class CrossingWaysConnection extends AsyncTask<Void, CallbackInfo, Void>
 {
+	
 	/**
 	 * _baseUrl + "ServiceName" e.g. VerifyCredentials
+	 * 
+	 * even if the development server is used, the namespace does NOT change
 	 */
-	// Live:
-	//private String _namespace = "http://www.crossingways.com/";
-	// Developement
-	private String _namespace = "http://crossingways.graz.interad.at:8080/";
+	private String _namespace = "http://www.crossingways.com/";
+
 	
 	/**
 	 * Url of the ASP Webservice
@@ -429,7 +430,7 @@ public class CrossingWaysConnection extends AsyncTask<Void, CallbackInfo, Void>
 	 * blocking the calling thread. This kind of request is called "priority request", they are handled 
 	 * by a second request queue which is prioritized by the worker thread
 	 */
-	public void PostGPXUploadRequest(String username, String password, String trackName, String gpxData)
+	public void PostGPXUploadRequest(String username, String password, String trackName, String gpxData, IUiCallback uiCallback)
 		throws CWException
 	{
 		try 
@@ -438,7 +439,8 @@ public class CrossingWaysConnection extends AsyncTask<Void, CallbackInfo, Void>
 					username, 
 					HashUtils.HashPassword(password),
 					trackName,
-					gpxData
+					gpxData,
+					uiCallback
 					);
 			
 			EnqueuePriorityRequest(gpxRequest);

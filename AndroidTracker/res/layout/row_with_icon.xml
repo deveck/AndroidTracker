@@ -3,15 +3,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
+	android:textColor="@color/white"
+	android:background="@color/black"
+	android:paddingLeft="8sp"
+	android:paddingTop="15sp"
+	android:paddingBottom="15sp"
 >
 
 	<ImageView
 		android:id="@+id/icon"
-		android:layout_width="22px"
-		android:paddingLeft="2px"
-		android:paddingRight="2px"
-		android:paddingTop="2px"
-		android:layout_height="wrap_content"
+		android:layout_width="32sp"
+		android:layout_height="32sp"
+	    android:scaleType="fitXY"
 		android:src="@anim/working"
 	 />
 	 
@@ -19,7 +22,9 @@
 	 	android:id="@+id/label"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:textSize="44sp"
+		android:gravity="center_vertical"
+		android:textSize="20sp"
+		android:paddingLeft="6sp"
 	/>
 
 </LinearLayout>

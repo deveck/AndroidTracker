@@ -1,5 +1,8 @@
 package org.cw.connection;
 
+import org.cw.CWException;
+import org.cw.CWWithCallbackInfoException;
+
 /**
  * Represents the request to upload gpx data
  * 
@@ -30,19 +33,37 @@ public class UploadGPXRequest extends Request
 			String username,
 			String pwHash,
 			String trackname,
-			String gpxData
+			String gpxData,
+			IUiCallback callback
 	)
 	{
 		_username = username;
 		_pwHash = pwHash;
 		_trackname = trackname;
 		_gpxData = gpxData;
+		_callback = callback;
 	}
 	
 	@Override
 	public boolean Execute(CrossingWaysConnection conn) 
 	{
-		return false;
+		try
+		{ 
+			if(conn.UploadGpx(this).IsError())
+				return false;
+		}
+		catch(CWWithCallbackInfoException e)
+		{
+			if(e.getCallbackInfo().getProgressInfo().getRequeue() == false)
+				return true;
+			return false;
+		}
+		catch(CWException e)
+		{
+			return false;
+		}
+		
+		return true;
 	}
 
 	/**

@@ -1,9 +1,15 @@
 package org.cw;
 
+import java.util.List;
 import java.util.Vector;
 
+import org.cw.TrackListDataAdapter.ViewTypeEnum;
+import org.cw.connection.IUiCallback;
+import org.cw.connection.RequestProgressInfo;
+import org.cw.connection.RequestProgressInfo.StatusTypeEnum;
 import org.cw.dataitems.TrackFile;
 import org.cw.dataitems.TrackInformation;
+import org.cw.utils.AlertBuilder;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,13 +18,61 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class TrackListActivity extends Activity {
+	
+	public class PendingUploadInfo implements IUiCallback
+	{
+		/** TrackFile this instance carries about */
+		private TrackFile _trackFile;
+		
+		private TrackListActivity _trackListActivity; 
+		
+		private TrackListDataAdapter _listAdapter = null;
+		
+		public PendingUploadInfo(TrackFile trackFile, TrackListDataAdapter listAdapter, TrackListActivity activity)
+		{
+			_trackFile = trackFile;
+			_listAdapter = listAdapter;
+			_trackListActivity = activity;
+		}
+		
+		@Override
+		public void StatusUpdate(RequestProgressInfo progressInfo) 
+		{
+			int position = _listAdapter.getPosition(_trackFile);
+			if(progressInfo.getStatus() == StatusTypeEnum.ERROR)
+			{
+				_listAdapter.setViewType(position, ViewTypeEnum.Default);
+				_trackListActivity._alerts.ShowInfoBox(
+						String.format("There was an error sending the track '%s', please try again later", _trackFile.toString()),
+						"Error", "Close");
+				progressInfo.setRequeue(false);
+				_trackListActivity.RemoveUploadInfo(this);
+			}
+			else if(progressInfo.getStatus() == StatusTypeEnum.COMPLETED)
+			{
+				_listAdapter.setViewType(position, ViewTypeEnum.Default);
+				_trackListActivity._alerts.ShowInfoBox(
+						String.format("The track '%s' was sucessfully sent!", _trackFile.toString()),								
+						"Success", 
+						"Close");
+				_trackListActivity.RemoveUploadInfo(this);
+			}			
+		}
+		
+	}
+	
+	/**
+	 * Contains all uploads that are currently in progress, 
+	 * as long this list is not empty, it is not allowed to close the activity
+	 */
+	private List<PendingUploadInfo> _pendingUploads = new Vector<PendingUploadInfo>();
+	
+	private AlertBuilder _alerts;
 	
 	private ListView _list;
 	private Button _buttonLoad;
@@ -36,6 +90,8 @@ public class TrackListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
+		
+		_alerts = new AlertBuilder(this);
 		
 		setContentView(R.layout.tracklist);
 		
@@ -98,8 +154,7 @@ public class TrackListActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO UPLOAD track to crossingways
-				//finish();
+				ButtonUpload_Clicked();
 			}
 		});
 		
@@ -113,11 +168,64 @@ public class TrackListActivity extends Activity {
 		_buttonCancel.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				setResult(ActivityConstants.RES_NOTHINGTODO);
-				finish();
+				ButtonCancel_Clicked();
 			}
 		});
 
+	}
+	
+	/**
+	 * Checks if any action on the activity other than upload posting is possible.
+	 * If any upload is posted, the activity cannot be closed
+	 * @return
+	 */
+	private boolean IsActionPossible()
+	{
+		if(_pendingUploads.size() > 0)
+			_alerts.ShowInfoBox("Please wait till all uploads are ready....", "Please wait", "Close");
+		
+		return !(_pendingUploads.size() > 0);
+	}
+	
+	private void ButtonCancel_Clicked()
+	{
+		if(IsActionPossible())
+		{
+			setResult(ActivityConstants.RES_NOTHINGTODO);
+			finish();
+		}
+	}
+	
+	private void ButtonUpload_Clicked()
+	{
+		try
+		{
+			if(_list.getCheckedItemPosition() == ListView.INVALID_POSITION)
+				return;
+			
+			_listAdapter.setViewType(_list.getCheckedItemPosition(), ViewTypeEnum.Working);
+			
+			TrackFile myTrackFile = (TrackFile)_list.getItemAtPosition(_list.getCheckedItemPosition());
+			
+			if(_pendingUploads.contains(myTrackFile))
+				return;
+			
+			PendingUploadInfo newUploadInfo = new PendingUploadInfo(myTrackFile, _listAdapter, this);
+			_pendingUploads.add(newUploadInfo);
+			Environment.Instance().ConnectionInstance().PostGPXUploadRequest(
+					Environment.Instance().Settings().getUsername(),
+					Environment.Instance().Settings().getPassword(),
+					myTrackFile.toString(),
+					myTrackFile.getGPXData(),
+					newUploadInfo);
+		}
+		catch(Exception e)
+		{
+			Environment.Instance().AlertBuilderInstance().ShowInfoBox(
+				e.getMessage(),
+				"Error", 
+				"Close");
+		}
 	}
 	
 	/** Load the selected track back to resume */
@@ -126,6 +234,9 @@ public class TrackListActivity extends Activity {
 		if(_list.getCheckedItemPosition() == ListView.INVALID_POSITION)
 			return;
 		
+		if(IsActionPossible() == false)
+			return;
+			
 		TrackFile fileToLoad = (TrackFile)_list.getItemAtPosition(_list.getCheckedItemPosition());
 		
 		TrackInformation trackInformation = TrackInformation.CreateFromTrackFile(fileToLoad);
@@ -148,10 +259,17 @@ public class TrackListActivity extends Activity {
 	
     private void ButtonSettings_Clicked()
     {
+    	if(IsActionPossible() == false)
+			return;
+    	
     	startActivity(new Intent(this, SettingsActivity.class));
     }
+    
     private void ButtonRecord_Clicked()
     {
+    	if(IsActionPossible() == false)
+			return;
+    	
 		setResult(ActivityConstants.RES_NOTHINGTODO);
 		finish();
 	}   	
@@ -160,6 +278,9 @@ public class TrackListActivity extends Activity {
 	private void ButtonDelete_Clicked()
 	{
 		if(_list.getCheckedItemPosition() == ListView.INVALID_POSITION)
+			return;
+
+		if(IsActionPossible() == false)
 			return;
 		
 		final TrackFile selectedTrackFile = (TrackFile)_list.getItemAtPosition(_list.getCheckedItemPosition());
@@ -197,9 +318,14 @@ public class TrackListActivity extends Activity {
 		}
 		
 		_listAdapter = new TrackListDataAdapter(this, files);
-		_list.setAdapter(new ArrayAdapter<TrackFile>(this,
-				android.R.layout.simple_list_item_multiple_choice, files.toArray(new TrackFile[0])));
+		_list.setAdapter(_listAdapter);
 		
+	}
+	
+	/** Removes the specified PendingUploadInfo from the pending upload info list */
+	private void RemoveUploadInfo(PendingUploadInfo info)
+	{
+		_pendingUploads.remove(info);
 	}
 
 }

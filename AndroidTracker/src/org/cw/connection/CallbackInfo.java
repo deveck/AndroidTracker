@@ -61,6 +61,6 @@ public class CallbackInfo
 	 */
 	public void SignalExecution()
 	{
-		_executedCond.notify();
+		_executedCond.signal();
 	}
 }

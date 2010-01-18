@@ -114,7 +114,16 @@ public class TrackerApp extends MainActivity implements IGpsStatusReceiver, ICal
 //        _labelDuration = (TextView)findViewById(R.id.labelDuration);
 //        _labelDistance = (TextView)findViewById(R.id.labelDistance);
 //        
-//        _buttonStartRecording = (ImageButton)findViewById(R.id.buttonStartRecording);
+
+        _buttonStartRecording = (ImageButton)findViewById(R.id.buttonStartRecording);
+        _buttonStartRecording.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ButtonStartRecording_Clicked();				
+			}
+		});
+
 //        _manageTracks = (ImageButton)findViewById(R.id.buttonTracks);
 //        
 //        _buttonPauseRecording = (ImageButton)findViewById(R.id.buttonPauseRecording);
@@ -142,13 +151,6 @@ public class TrackerApp extends MainActivity implements IGpsStatusReceiver, ICal
 //			}
 //		});
 //        
-//        _buttonStartRecording.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				ButtonStartRecording_Clicked();				
-//			}
-//		});
 //        
 //        _buttonPauseRecording.setOnClickListener(new OnClickListener() {			
 //			@Override

@@ -62,7 +62,6 @@ public final class R {
         public static final int buttonStartRecording=0x7f070005;
         public static final int buttonStopRecording=0x7f070007;
         public static final int buttonTrackCancel=0x7f070024;
-        public static final int buttonTrackListCancel=0x7f070035;
         public static final int buttonTrackListDelete=0x7f070034;
         public static final int buttonTrackListLoad=0x7f070032;
         public static final int buttonTrackListUpLoad=0x7f070033;

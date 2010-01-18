@@ -101,7 +101,7 @@ public class TrackListActivity extends MainActivity {
 		_buttonLoad = (Button)findViewById(R.id.buttonTrackListLoad);
 		_buttonUpLoad = (Button)findViewById(R.id.buttonTrackListUpLoad);
 		_buttonDelete = (Button)findViewById(R.id.buttonTrackListDelete);
-		_buttonCancel = (Button)findViewById(R.id.buttonTrackListCancel);
+		//_buttonCancel = (Button)findViewById(R.id.buttonTrackListCancel);
 //		
 //        
 //        ((ImageButton)findViewById(R.id.buttonRecord)).setOnClickListener(new OnClickListener() {
@@ -142,32 +142,34 @@ public class TrackListActivity extends MainActivity {
 //			alert.show();
 //		}
 //		
-//		RebuildTrackList();
+		RebuildTrackList();
 //		
-//		_buttonLoad.setOnClickListener(new OnClickListener() {
+		_buttonLoad.setOnClickListener(new OnClickListener() {
 //			
-//			@Override
-//			public void onClick(View v) {
-//				ButtonLoad_Clicked();
-//			}
-//		});
+			@Override
+			public void onClick(View v) {
+				ButtonLoad_Clicked();
+			}
+		});
 //		
-//		_buttonUpLoad.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				ButtonUpload_Clicked();
-//			}
-//		});
+		_buttonUpLoad.setOnClickListener(new OnClickListener() {
+		
+			@Override
+			public void onClick(View v) {
+				ButtonUpload_Clicked();
+			}
+		});
 //		
-//		_buttonDelete.setOnClickListener(new OnClickListener() {			
-//			@Override
-//			public void onClick(View v) {
-//				ButtonDelete_Clicked();				
-//			}
-//		});
+		_buttonDelete.setOnClickListener(new OnClickListener() {			
+
+			@Override
+			public void onClick(View v) {
+				ButtonDelete_Clicked();				
+			}
+		});
 //		
 //		_buttonCancel.setOnClickListener(new OnClickListener() {			
+//
 //			@Override
 //			public void onClick(View v) {
 //				ButtonCancel_Clicked();
@@ -189,14 +191,14 @@ public class TrackListActivity extends MainActivity {
 		return !(_pendingUploads.size() > 0);
 	}
 	
-	private void ButtonCancel_Clicked()
-	{
-		if(IsActionPossible())
-		{
-			setResult(ActivityConstants.RES_NOTHINGTODO);
-			finish();
-		}
-	}
+//	private void ButtonCancel_Clicked()
+//	{
+//		if(IsActionPossible())
+//		{
+//			setResult(ActivityConstants.RES_NOTHINGTODO);
+//			finish();
+//		}
+//	}
 	
 	private void ButtonUpload_Clicked()
 	{

@@ -58,7 +58,7 @@
 				android:layout_height="wrap_content"
 				android:text="@string/textDelete" 
 				android:background="@android:drawable/btn_default_small"
-				/>
+				/><!--
 
 		<Button android:id="@+id/buttonTrackListCancel"
 				android:layout_width="fill_parent"
@@ -66,7 +66,7 @@
 				android:text="@string/textCancel" 
 				android:background="@android:drawable/btn_default_small"
 				/>
-		</LinearLayout>
+		--></LinearLayout>
 		</TableRow>
 	</TableLayout>
 </LinearLayout>

@@ -54,14 +54,14 @@ public abstract class MainActivity extends Activity {
 		});
 	}
 	
-	private final void onButtonSettings_clicked() {
+	protected void onButtonSettings_clicked() {
 		if(Environment.Instance().getCurrentActivity() == ActivityConstants.START_SETTINGSCREEN);
 		else{
 			setResult(ActivityConstants.START_SETTINGSCREEN);
 			finish();
 		}
 	}
-	private final void onButtonTracks_clicked() {
+	protected void onButtonTracks_clicked() {
 		if(Environment.Instance().getCurrentActivity() == ActivityConstants.START_TRACKSCREEN);
 		else{
 			setResult(ActivityConstants.START_TRACKSCREEN);
@@ -73,7 +73,7 @@ public abstract class MainActivity extends Activity {
 		//_inflater.inflate(R.layout.settings, _mainView);
 			
 		}
-	private final void onButtonRecord_clicked() {
+	protected void onButtonRecord_clicked() {
 		if(Environment.Instance().getCurrentActivity() == ActivityConstants.START_MAINSCREEN);
 		else{
 			setResult(ActivityConstants.START_MAINSCREEN);

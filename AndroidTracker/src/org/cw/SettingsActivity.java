@@ -102,15 +102,15 @@ public class SettingsActivity extends MainActivity
 	}
 	
 
-    private void ButtonRecord_Clicked()
-    {
-		setResult(ActivityConstants.RES_NOTHINGTODO);
-		finish();
-	}    
-    private void ButtonTracks_Clicked()
-    {
-    	startActivityForResult(new Intent(this, TrackListActivity.class), ActivityConstants.REQ_TRACKMANAGEMENT);
-	}    
+//    private void ButtonRecord_Clicked()
+//    {
+//		setResult(ActivityConstants.RES_NOTHINGTODO);
+//		finish();
+//	}    
+//    private void ButtonTracks_Clicked()
+//    {
+//    	startActivityForResult(new Intent(this, TrackListActivity.class), ActivityConstants.REQ_TRACKMANAGEMENT);
+//	}    
 	
 	/** Called on save button click,
 	 * Save all settings here, if they are verified
@@ -151,5 +151,17 @@ public class SettingsActivity extends MainActivity
 			e.ShowAlertDialog();
 			this.SetVerifiedState(false);
 		}
+	}
+	
+	protected final void onButtonSettings_clicked() {
+		super.onButtonSettings_clicked();
+	}
+
+	protected void onButtonTracks_clicked() {
+		super.onButtonTracks_clicked();
+	}
+
+	protected void onButtonRecord_clicked() {
+		super.onButtonRecord_clicked();
 	}
 }

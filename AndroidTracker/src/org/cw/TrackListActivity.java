@@ -93,15 +93,15 @@ public class TrackListActivity extends MainActivity {
 		super.setViewContent(ActivityConstants.START_TRACKSCREEN);
 		
 		
-//		_alerts = new AlertBuilder(this);
+		_alerts = new AlertBuilder(this);
 //		
 //		setContentView(R.layout.tracklist);
 //		
-//		_list = (ListView)findViewById(R.id.listTrackList);
-//		_buttonLoad = (Button)findViewById(R.id.buttonTrackListLoad);
-//		_buttonUpLoad = (Button)findViewById(R.id.buttonTrackListUpLoad);
-//		_buttonDelete = (Button)findViewById(R.id.buttonTrackListDelete);
-//		_buttonCancel = (Button)findViewById(R.id.buttonTrackListCancel);
+		_list = (ListView)findViewById(R.id.listTrackList);
+		_buttonLoad = (Button)findViewById(R.id.buttonTrackListLoad);
+		_buttonUpLoad = (Button)findViewById(R.id.buttonTrackListUpLoad);
+		_buttonDelete = (Button)findViewById(R.id.buttonTrackListDelete);
+		_buttonCancel = (Button)findViewById(R.id.buttonTrackListCancel);
 //		
 //        
 //        ((ImageButton)findViewById(R.id.buttonRecord)).setOnClickListener(new OnClickListener() {
@@ -328,6 +328,12 @@ public class TrackListActivity extends MainActivity {
 	private void RemoveUploadInfo(PendingUploadInfo info)
 	{
 		_pendingUploads.remove(info);
+	}
+	
+	protected final void onButtonRecord_clicked(){
+		if(IsActionPossible() == false)
+			return;
+		super.onButtonRecord_clicked();
 	}
 
 }

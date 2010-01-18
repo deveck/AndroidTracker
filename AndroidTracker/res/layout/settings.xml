@@ -2,20 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent" 
                 android:layout_height="wrap_content"
-                
-                android:orientation="vertical"
-                
-                 >
+                android:orientation="vertical" >
                  
    <TableLayout
    				android:layout_width="fill_parent"
    				android:layout_height="wrap_content"
-   				android:stretchColumns="1"
-   				>
+   				android:stretchColumns="1" >
    				
    		<TableRow>
-   	
-		    <TextView android:id="@+id/labelUsername"
+   		    <TextView android:id="@+id/labelUsername"
 		              android:layout_width="wrap_content" 
 		              android:layout_height="wrap_content" 
 		              android:text="@string/username"
@@ -68,17 +63,17 @@
 		 		android:layout_height="wrap_content"
 		 		android:text="@string/CredentialsNotVerified" />		 		
 		 
-		 </LinearLayout>
+		 </LinearLayout><!--
 		 
-		 <!--  Seperator -->
+		   Seperator 
 		 <TableRow android:minHeight="5px" />
 		 <TableRow	android:minHeight="5px"
 		 	android:background="@color/gray" />
 		 <TableRow android:minHeight="5px" />
-		 <!--  Seperator end -->
+		   Seperator end 
 
-	
-	<LinearLayout android:orientation="horizontal">
+	android:height="5px"
+	--><LinearLayout android:orientation="horizontal">
 
 		 	<TextView android:id="@+id/labelCommitInterval"
 		 			  android:layout_width="wrap_content"
@@ -92,7 +87,7 @@
 		 			  android:layout_height="wrap_content"
 		 			  android:background="@android:drawable/editbox_background"
 		 			  android:inputType="number"
-		 			  android:height="5px"
+		 			  
 		 			  >
 		 	
 		 	</EditText>
@@ -101,24 +96,24 @@
 	</TableLayout>      
   
   
-  	<TableLayout
+  	<!--<TableLayout
   			android:layout_width="fill_parent"
   			android:layout_height="wrap_content"
   			android:gravity="top"
   			> 		
   			
-  		<TableRow 
-  			android:minHeight="30px"
+  		--><!--<TableRow 
+  			android:minHeight="30sp"
   			/>
   			
-	    <Button android:id="@+id/buttonSave" 
+	    --><Button android:id="@+id/buttonSave" 
 	            android:layout_width="fill_parent" 
 	            android:layout_height="wrap_content" 
 	            android:text="@string/Save" 
-				/>            
+				/><!--            
              
     </TableLayout>
-</LinearLayout> 
+--></LinearLayout> 
     
 
 	<!--<TableLayout

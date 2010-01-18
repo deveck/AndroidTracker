@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"	 	
+	android:orientation="vertical" 
+	android:background="@drawable/backgroundgradient">
+	
+	<ImageView android:id="@+id/ImageLogo" 
+		android:layout_width="wrap_content" 
+		android:src="@drawable/logo"
+		android:layout_height="wrap_content"
+		android:layout_gravity="top|center_horizontal">
+	</ImageView>
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:id="@+id/mainLayout" 
+		android:gravity="center"/>
+	
+
+	<TableLayout
+		android:layout_height="fill_parent"
+		android:layout_width="fill_parent"
+		android:orientation="horizontal"
+		android:gravity="bottom|center_horizontal"
+		android:stretchColumns="*">
+		
+		<TableRow>
+			<ImageButton
+				android:id="@+id/buttonRecord"
+				android:src="@drawable/menus_record"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:scaleType="center"
+				>
+			</ImageButton>
+			<ImageButton
+				android:id="@+id/buttonTracks"
+				android:src="@drawable/menu_tracks"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:scaleType="center"
+				>
+			</ImageButton>	
+			<ImageButton
+			 	android:id="@+id/buttonSettings"
+				android:src="@drawable/menu_settings"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:scaleType="center">
+			</ImageButton>
+		</TableRow>
+	</TableLayout>
+</LinearLayout>

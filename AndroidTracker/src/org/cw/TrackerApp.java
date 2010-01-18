@@ -28,7 +28,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
  * @author Andreas Reiter <andreas.reiter@student.tugraz.at>
  *
  */
-public class TrackerApp extends Activity implements IGpsStatusReceiver, ICallback<Object>  {
+public class TrackerApp extends MainActivity implements IGpsStatusReceiver, ICallback<Object>  {
 	
 	public enum RecordingUiEnum
 	{
@@ -85,85 +85,85 @@ public class TrackerApp extends Activity implements IGpsStatusReceiver, ICallbac
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        _trackRecorder = new TrackRecorder();
-        
-        Environment.Instance().CreateSettings(this);
-        Environment.Instance().CreateAlertBuilderInstance(this);
-        Environment.Instance().CreateDefaultGPSProvider(this);
-        Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(this);
-        Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(new LiveTrackingUpdater());
-        Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(_trackRecorder);
-        
-        setContentView(R.layout.screen);        
-
-        _timer = new UiTimer(this);
-        _timer.setInterval(200);
-        _timer.setEnabled(true);
-        _timer.execute();
-        
-        _toggleLiveTracker = (ToggleButton)findViewById(R.id.buttonStartLiveTracking);
-        _labelLatitudeDegree = (TextView)findViewById(R.id.labelLatitudeDegree);
-        _labelLatitudeMinutes = (TextView)findViewById(R.id.labelLatitudeMinutes);
-        _labelLatitudeSeconds = (TextView)findViewById(R.id.labelLatitudeSeconds);
-        _labelLongitudeDegree = (TextView)findViewById(R.id.labelLongitudeDegree);
-        _labelLongitudeMinutes = (TextView)findViewById(R.id.labelLongitudeMinutes);
-        _labelLongitudeSeconds = (TextView)findViewById(R.id.labelLongitudeSeconds);
-        _labelAltitude = (TextView)findViewById(R.id.labelAltitude);
-        _labelSpeed = (TextView)findViewById(R.id.labelSpeed);
-        _labelDuration = (TextView)findViewById(R.id.labelDuration);
-        _labelDistance = (TextView)findViewById(R.id.labelDistance);
-        
-        _buttonStartRecording = (ImageButton)findViewById(R.id.buttonStartRecording);
-        _manageTracks = (ImageButton)findViewById(R.id.buttonTracks);
-        
-        _buttonPauseRecording = (ImageButton)findViewById(R.id.buttonPauseRecording);
-        _buttonStopRecording = (ImageButton)findViewById(R.id.buttonStopRecording);
-        
-        _manageTracks.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ButtonTracks_Clicked();
-			}
-		});
-        
-        ((ImageButton)findViewById(R.id.buttonSettings)).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ButtonSettings_Clicked();
-			}
-		});
-        
-        _toggleLiveTracker.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				Environment.Instance().Settings().setLiveTrackerEnabled(isChecked);			
-			}
-		});
-        
-        _buttonStartRecording.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				ButtonStartRecording_Clicked();				
-			}
-		});
-        
-        _buttonPauseRecording.setOnClickListener(new OnClickListener() {			
-			@Override
-			public void onClick(View v) {
-				ButtonPauseRecording_Clicked();
-			}
-		});
-        
-        _buttonStopRecording.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				ButtonStopRecording_Clicked();				
-			}
-		});
+        super.setViewContent(ActivityConstants.START_MAINSCREEN);
+//        _trackRecorder = new TrackRecorder();
+//        
+//        Environment.Instance().CreateSettings(this);
+//        Environment.Instance().CreateAlertBuilderInstance(this);
+//        Environment.Instance().CreateDefaultGPSProvider(this);
+//        Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(this);
+//        Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(new LiveTrackingUpdater());
+//        Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(_trackRecorder);
+//        
+      //  setContentView(R.layout.main);        
+//
+//        _timer = new UiTimer(this);
+//        _timer.setInterval(200);
+//        _timer.setEnabled(true);
+//        _timer.execute();
+//        
+//        _toggleLiveTracker = (ToggleButton)findViewById(R.id.buttonStartLiveTracking);
+//        _labelLatitudeDegree = (TextView)findViewById(R.id.labelLatitudeDegree);
+//        _labelLatitudeMinutes = (TextView)findViewById(R.id.labelLatitudeMinutes);
+//        _labelLatitudeSeconds = (TextView)findViewById(R.id.labelLatitudeSeconds);
+//        _labelLongitudeDegree = (TextView)findViewById(R.id.labelLongitudeDegree);
+//        _labelLongitudeMinutes = (TextView)findViewById(R.id.labelLongitudeMinutes);
+//        _labelLongitudeSeconds = (TextView)findViewById(R.id.labelLongitudeSeconds);
+//        _labelAltitude = (TextView)findViewById(R.id.labelAltitude);
+//        _labelSpeed = (TextView)findViewById(R.id.labelSpeed);
+//        _labelDuration = (TextView)findViewById(R.id.labelDuration);
+//        _labelDistance = (TextView)findViewById(R.id.labelDistance);
+//        
+//        _buttonStartRecording = (ImageButton)findViewById(R.id.buttonStartRecording);
+//        _manageTracks = (ImageButton)findViewById(R.id.buttonTracks);
+//        
+//        _buttonPauseRecording = (ImageButton)findViewById(R.id.buttonPauseRecording);
+//        _buttonStopRecording = (ImageButton)findViewById(R.id.buttonStopRecording);
+//        
+//        _manageTracks.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				ButtonTracks_Clicked();
+//			}
+//		});
+//        
+//        ((ImageButton)findViewById(R.id.buttonSettings)).setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				ButtonSettings_Clicked();
+//			}
+//		});
+//        
+//        _toggleLiveTracker.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//			
+//			@Override
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//				Environment.Instance().Settings().setLiveTrackerEnabled(isChecked);			
+//			}
+//		});
+//        
+//        _buttonStartRecording.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				ButtonStartRecording_Clicked();				
+//			}
+//		});
+//        
+//        _buttonPauseRecording.setOnClickListener(new OnClickListener() {			
+//			@Override
+//			public void onClick(View v) {
+//				ButtonPauseRecording_Clicked();
+//			}
+//		});
+//        
+//        _buttonStopRecording.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				ButtonStopRecording_Clicked();				
+//			}
+//		});
     }
     
     private void ButtonTracks_Clicked()

@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-public class TrackListActivity extends Activity {
+public class TrackListActivity extends MainActivity {
 	
 	public class PendingUploadInfo implements IUiCallback
 	{
@@ -90,87 +90,89 @@ public class TrackListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
+		super.setViewContent(ActivityConstants.START_TRACKSCREEN);
 		
-		_alerts = new AlertBuilder(this);
 		
-		setContentView(R.layout.tracklist);
-		
-		_list = (ListView)findViewById(R.id.listTrackList);
-		_buttonLoad = (Button)findViewById(R.id.buttonTrackListLoad);
-		_buttonUpLoad = (Button)findViewById(R.id.buttonTrackListUpLoad);
-		_buttonDelete = (Button)findViewById(R.id.buttonTrackListDelete);
-		_buttonCancel = (Button)findViewById(R.id.buttonTrackListCancel);
-		
-        
-        ((ImageButton)findViewById(R.id.buttonRecord)).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ButtonRecord_Clicked();
-			}
-		});
-        
-        ((ImageButton)findViewById(R.id.buttonSettings)).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ButtonSettings_Clicked();
-			}
-		});            
-        		
-		
-		// store current track first?
-		if (Environment.Instance().getCurrentTrack() != null) {
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-			alert.setTitle("Warning possible loose of data");
-			alert.setMessage("Store "
-					+ Environment.Instance().getCurrentTrack().getName()
-					+ " now?");
-			alert.setPositiveButton("YES",
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Environment.Instance().getCurrentTrack().save();
-						}
-					});
-			alert.setNegativeButton("NO",
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-						}
-					});
-			alert.show();
-		}
-		
-		RebuildTrackList();
-		
-		_buttonLoad.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				ButtonLoad_Clicked();
-			}
-		});
-		
-		_buttonUpLoad.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				ButtonUpload_Clicked();
-			}
-		});
-		
-		_buttonDelete.setOnClickListener(new OnClickListener() {			
-			@Override
-			public void onClick(View v) {
-				ButtonDelete_Clicked();				
-			}
-		});
-		
-		_buttonCancel.setOnClickListener(new OnClickListener() {			
-			@Override
-			public void onClick(View v) {
-				ButtonCancel_Clicked();
-			}
-		});
+//		_alerts = new AlertBuilder(this);
+//		
+//		setContentView(R.layout.tracklist);
+//		
+//		_list = (ListView)findViewById(R.id.listTrackList);
+//		_buttonLoad = (Button)findViewById(R.id.buttonTrackListLoad);
+//		_buttonUpLoad = (Button)findViewById(R.id.buttonTrackListUpLoad);
+//		_buttonDelete = (Button)findViewById(R.id.buttonTrackListDelete);
+//		_buttonCancel = (Button)findViewById(R.id.buttonTrackListCancel);
+//		
+//        
+//        ((ImageButton)findViewById(R.id.buttonRecord)).setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				ButtonRecord_Clicked();
+//			}
+//		});
+//        
+//        ((ImageButton)findViewById(R.id.buttonSettings)).setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				ButtonSettings_Clicked();
+//			}
+//		});            
+//        		
+//		
+//		// store current track first?
+//		if (Environment.Instance().getCurrentTrack() != null) {
+//			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//			alert.setTitle("Warning possible loose of data");
+//			alert.setMessage("Store "
+//					+ Environment.Instance().getCurrentTrack().getName()
+//					+ " now?");
+//			alert.setPositiveButton("YES",
+//					new DialogInterface.OnClickListener() {
+//						@Override
+//						public void onClick(DialogInterface dialog, int which) {
+//							Environment.Instance().getCurrentTrack().save();
+//						}
+//					});
+//			alert.setNegativeButton("NO",
+//					new DialogInterface.OnClickListener() {
+//						@Override
+//						public void onClick(DialogInterface dialog, int which) {
+//						}
+//					});
+//			alert.show();
+//		}
+//		
+//		RebuildTrackList();
+//		
+//		_buttonLoad.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				ButtonLoad_Clicked();
+//			}
+//		});
+//		
+//		_buttonUpLoad.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				ButtonUpload_Clicked();
+//			}
+//		});
+//		
+//		_buttonDelete.setOnClickListener(new OnClickListener() {			
+//			@Override
+//			public void onClick(View v) {
+//				ButtonDelete_Clicked();				
+//			}
+//		});
+//		
+//		_buttonCancel.setOnClickListener(new OnClickListener() {			
+//			@Override
+//			public void onClick(View v) {
+//				ButtonCancel_Clicked();
+//			}
+//		});
 
 	}
 	

@@ -4,12 +4,12 @@
       android:versionCode="1"
       android:versionName="1.0">
     <application android:icon="@drawable/application_logo" android:label="@string/app_name">
-        <activity android:name=".TrackerApp"
+        <activity android:name=".MainApplication" android:label="@string/app_name"><intent-filter><action android:name="android.intent.action.MAIN"></action>
+<category android:name="android.intent.category.LAUNCHER"></category>
+</intent-filter>
+</activity><activity android:name=".TrackerApp"
                   android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            
         </activity>
         <activity android:name=".SettingsActivity"
         		  android:label="@string/settings">
@@ -17,6 +17,7 @@
 
     <activity android:name=".TrackListActivity" android:label="@string/tracklist"></activity>
 <activity android:name=".NewTrackActivity" android:label="@string/newtrack"></activity>
+
 </application>
     <uses-sdk android:minSdkVersion="6" />
 

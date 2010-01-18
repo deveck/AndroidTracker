@@ -17,7 +17,7 @@ import android.content.Context;
  *
  */
 public class Environment 
-{
+{	
 	private static Environment _environment = null;	
 	public static final Environment Instance()
 	{
@@ -66,4 +66,8 @@ public class Environment
 	private TrackInformation _currenttrack = null;
 	public void registerTrack(TrackInformation track){ _currenttrack = track; }
 	public TrackInformation getCurrentTrack(){ return _currenttrack; }
+	
+	private int _currentActivity = 0;
+	public void setCurrentActivity(int currentActivity){ _currentActivity = currentActivity; }
+	public int getCurrentActivity(){ return _currentActivity; }
 }

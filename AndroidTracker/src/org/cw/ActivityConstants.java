@@ -24,6 +24,14 @@ public final class ActivityConstants
 
 	/** Request code which signals that the track management screen was started */
 	public static final int REQ_TRACKMANAGEMENT = 2;
+	
+	public static final int START_MAINSCREEN = 10;
+	
+	public static final int START_TRACKSCREEN = 11;
+	
+	public static final int START_SETTINGSCREEN = 12;
+	
+	public static final int ACTIVITY_CHOOSE = 100;
 
 	
 }

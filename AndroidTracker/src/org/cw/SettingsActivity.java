@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class SettingsActivity extends Activity 
+public class SettingsActivity extends MainActivity 
 {
 	private EditText _textUsername;
 	private EditText _textPassword;
@@ -24,22 +24,23 @@ public class SettingsActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
+		super.setViewContent(ActivityConstants.START_SETTINGSCREEN);
 		
-		setContentView(R.layout.settings);
-		
+//		setContentView(R.layout.settings);
+//		
 		_textUsername = (EditText)findViewById(R.id.textUsername);
 		_textPassword = (EditText)findViewById(R.id.textPassword);
 		_textCommitInterval = (EditText)findViewById(R.id.textCommitInterval);
 		_buttonVerifyCredentials = (ImageButton)findViewById(R.id.buttonVerifyCredentials);
 		_labelVerifyCredentials = (TextView)findViewById(R.id.labelVerifyCredentials);
-		
-		// Load settings
+//		
+//		// Load settings
 		_textUsername.setText(Environment.Instance().Settings().getUsername(""));
         _textPassword.setText(Environment.Instance().Settings().getPassword(""));      
         _textCommitInterval.setText(new Integer((Environment.Instance().Settings().getLiveTrackerCommitInterval()/1000)).toString());
-        
+//        
         this.SetVerifiedState(true);
-        
+//        
         _textUsername.setOnKeyListener(new OnKeyListener() {			
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -47,32 +48,32 @@ public class SettingsActivity extends Activity
 				return false;
 			}
 		});
-        
-        ((Button)findViewById(R.id.buttonOk)).setOnClickListener(new OnClickListener() {
-			
+//        
+        ((Button)findViewById(R.id.buttonSave)).setOnClickListener(new OnClickListener() {
+////			
 			@Override
 			public void onClick(View v) {
 				OnSave_Clicked();				
 			}
 		});
-        
-        ((ImageButton)findViewById(R.id.buttonRecord)).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ButtonRecord_Clicked();
-			}
-		});
-        
-        ((ImageButton)findViewById(R.id.buttonTracks)).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ButtonTracks_Clicked();
-			}
-		});             
-        
+////        
+//        ((ImageButton)findViewById(R.id.buttonRecord)).setOnClickListener(new OnClickListener() {
+//			@Override
+//		public void onClick(View v) {
+//				ButtonRecord_Clicked();
+//			}
+//		});
+////        
+////        ((ImageButton)findViewById(R.id.buttonTracks)).setOnClickListener(new OnClickListener() {
+////			@Override
+////			public void onClick(View v) {
+////				ButtonTracks_Clicked();
+////			}
+////		});             
+//        
         _buttonVerifyCredentials.setOnClickListener(new OnClickListener() {
 			
-			@Override
+		@Override
 			public void onClick(View v) {
 				OnVerifyCredentials_Clicked();				
 			}
@@ -129,7 +130,7 @@ public class SettingsActivity extends Activity
 		catch(NumberFormatException e)
 		{
 		}
-		finish();
+		//finish();
 	}
 	
 	private void OnVerifyCredentials_Clicked()

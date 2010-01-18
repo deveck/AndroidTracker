@@ -3,10 +3,13 @@ package org.cw;
 //import java.text.SimpleDateFormat;
 //import java.util.Date;
 
+import java.util.Date;
+
 import org.cw.dataitems.TrackFile;
 import org.cw.dataitems.TrackInformation;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,6 +24,7 @@ public class NewTrackActivity extends Activity {
 	private EditText _textTracksummary;
 	private Button _btnOK;
 	private Button _btnCancel;
+	private boolean _fresh;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +39,23 @@ public class NewTrackActivity extends Activity {
 		_btnOK = (Button) findViewById(R.id.buttonTrackOk);
 		_btnCancel = (Button) findViewById(R.id.buttonTrackCancel);
 
-		_textTrackname.setOnKeyListener(new OnKeyListener() {
-			
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				// TODO maybe key must be forwarded?
-				// I do not understand that?
-				// different things happens if keyboard, touch-keybord, num-pad is used!
-				
-				if(_textTrackname.getText().length() > 0){
-					CheckForOverride();
-					_btnOK.setEnabled(true);
-				}
-				else
-					_btnOK.setEnabled(false);
-				return false;
-			}
-		});
+//		_textTrackname.setOnKeyListener(new OnKeyListener() {
+//			
+//			@Override
+//			public boolean onKey(View v, int keyCode, KeyEvent event) {
+//				// TODO maybe key must be forwarded?
+//				// I do not understand that?
+//				// different things happens if keyboard, touch-keybord, num-pad is used!
+//				
+//				if(_textTrackname.getText().length() > 0){
+//					CheckForOverride();
+//					_btnOK.setEnabled(true);
+//				}
+//				else
+//					_btnOK.setEnabled(false);
+//				return false;
+//			}
+//		});
 		
 		_btnOK.setOnClickListener(new OnClickListener() {
 
@@ -75,10 +79,20 @@ public class NewTrackActivity extends Activity {
 		
 		// Always set a default name, so that it is easy to start a new track, 
 		// especially if you do not want to type...
-		//SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");		
-		//Date currentTime_1 = new Date();		
-		//_textTrackname.setText("Track on " +  formatter.format(currentTime_1));
-		_textTrackname.setText("New Track");
+		_fresh = true;
+		//_textTrackname.setTextColor(android.R.color.darker_gray);
+		_textTrackname.setText("My track on " + new Date().toLocaleString());
+		_textTrackname.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(_fresh == false)
+					return;
+				_fresh = false;
+				_textTrackname.setText("");
+			//	_textTrackname.setTextColor(android.R.color.black);
+			}
+		});
 		_btnOK.setEnabled(true);
 	}
 

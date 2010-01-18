@@ -335,5 +335,15 @@ public class TrackListActivity extends MainActivity {
 			return;
 		super.onButtonRecord_clicked();
 	}
+	
+	protected final void onButtonSettings_clicked(){
+		if(IsActionPossible() == false)
+			return;
+		super.onButtonSettings_clicked();
+	}
+	
+	protected final void onButtonTracks_clicked(){
+		super.onButtonTracks_clicked();
+	}
 
 }

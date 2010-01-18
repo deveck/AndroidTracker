@@ -63,17 +63,9 @@
 		 		android:layout_height="wrap_content"
 		 		android:text="@string/CredentialsNotVerified" />		 		
 		 
-		 </LinearLayout><!--
-		 
-		   Seperator 
-		 <TableRow android:minHeight="5px" />
-		 <TableRow	android:minHeight="5px"
-		 	android:background="@color/gray" />
-		 <TableRow android:minHeight="5px" />
-		   Seperator end 
-
-	android:height="5px"
-	--><LinearLayout android:orientation="horizontal">
+		 </LinearLayout>
+		
+	<LinearLayout android:orientation="horizontal">
 
 		 	<TextView android:id="@+id/labelCommitInterval"
 		 			  android:layout_width="wrap_content"
@@ -95,61 +87,11 @@
 
 	</TableLayout>      
   
-  
-  	<!--<TableLayout
-  			android:layout_width="fill_parent"
-  			android:layout_height="wrap_content"
-  			android:gravity="top"
-  			> 		
-  			
-  		--><!--<TableRow 
-  			android:minHeight="30sp"
-  			/>
-  			
-	    --><Button android:id="@+id/buttonSave" 
+	<Button android:id="@+id/buttonSave" 
 	            android:layout_width="fill_parent" 
 	            android:layout_height="wrap_content" 
 	            android:text="@string/Save" 
-				/><!--            
+				/>            
              
-    </TableLayout>
---></LinearLayout> 
-    
+</LinearLayout> 
 
-	<!--<TableLayout
-		android:layout_height="fill_parent"
-		android:layout_width="fill_parent"
-		android:orientation="horizontal"
-		android:gravity="bottom"
-		android:stretchColumns="*"
-		>
-		
-		<TableRow>
-			<ImageButton
-				android:id="@+id/buttonRecord"
-				android:src="@drawable/menus_record"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:scaleType="center"
-				>
-			</ImageButton>
-			<ImageButton
-				android:id="@+id/buttonTracks"
-				android:src="@drawable/menu_tracks"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:scaleType="center"
-				>
-			</ImageButton>	
-			<ImageButton
-			 	android:id="@+id/buttonSettings"
-				android:src="@drawable/menu_settings"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:scaleType="center">
-			</ImageButton>
-		</TableRow>
-	</TableLayout>    
-    
-
--->

@@ -9,10 +9,12 @@ package org.cw;
 public final class ActivityConstants 
 {
 	/** Signals that the Activity finished successful, or that data can be loaded */
-	public static final int RES_OK  = 0;
+	public static final int RES_OK  = 1;
 	
 	/** Signals that the Activity has been canceled */
 	public static final int RES_CANCEL = -1;
+	
+	public static final int BUTTON_RETURN_PRESSED = 0;
 	
 	/** Signals that the activity has completed its operation without an error,
 	 *  but no action by the caller is required

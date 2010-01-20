@@ -38,7 +38,11 @@ public class MainApplication extends Activity {
 			else if(resultCode == ActivityConstants.START_TRACKSCREEN){
 				Intent _currentActivity = new Intent(this, TrackListActivity.class);
 				startActivityForResult(_currentActivity, ActivityConstants.ACTIVITY_CHOOSE);
-			}			
+			}
+			else if(resultCode == ActivityConstants.BUTTON_RETURN_PRESSED){
+				Intent _currentActivity = new Intent(this, TrackerApp.class);
+				startActivityForResult(_currentActivity, ActivityConstants.ACTIVITY_CHOOSE);
+			}
 		}
 	}
 

@@ -1,5 +1,6 @@
 package org.cw;
 
+import org.cw.TrackerApp.RecordingUiEnum;
 import org.cw.connection.CrossingWaysConnection;
 import org.cw.dataitems.TrackInformation;
 import org.cw.gps.DefaultGPSProvider;
@@ -78,4 +79,11 @@ public class Environment
 	private TrackRecorder _trackRecorder = null;
 	public TrackRecorder getTrackRecorder(){ return _trackRecorder; }
 	public void CreateTrackRecorder(){ _trackRecorder = new TrackRecorder(); }
+	
+	/**
+	 * Last recording state
+	 */
+	private RecordingUiEnum _recState = RecordingUiEnum.NotRecording;
+	public void setLastRecordingState(RecordingUiEnum recState){ _recState = recState; }
+	public RecordingUiEnum getLastRecordingState(){ return _recState; }
 }

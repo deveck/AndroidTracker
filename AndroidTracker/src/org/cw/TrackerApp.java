@@ -130,6 +130,9 @@ public class TrackerApp extends MainActivity implements IGpsStatusReceiver, ICal
 				ButtonStopRecording_Clicked();				
 			}
 		});
+        
+        SetRecordingUiStyle(Environment.Instance().getLastRecordingState());
+        Callback(null);
     }
     
     @Override
@@ -197,6 +200,7 @@ public class TrackerApp extends MainActivity implements IGpsStatusReceiver, ICal
     		_buttonStopRecording.setVisibility(View.VISIBLE);
     		_buttonStartRecording.setImageResource(R.drawable.recording_bt);
     	}
+    	Environment.Instance().setLastRecordingState(uiState);
     }
     
     /**

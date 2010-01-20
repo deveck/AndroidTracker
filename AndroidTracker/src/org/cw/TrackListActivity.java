@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.cw.TrackListDataAdapter.ViewTypeEnum;
+import org.cw.TrackerApp.RecordingUiEnum;
 import org.cw.connection.IUiCallback;
 import org.cw.connection.RequestProgressInfo;
 import org.cw.connection.RequestProgressInfo.StatusTypeEnum;
@@ -251,9 +252,9 @@ public class TrackListActivity extends MainActivity {
 		else
 		{
 			Environment.Instance().registerTrack(trackInformation);
-			
-			setResult(ActivityConstants.RES_OK);
-			finish();
+			//Environment.Instance().setLastRecordingState(RecordingUiEnum.PausedRecording);
+//			setResult(ActivityConstants.RES_OK);
+//			finish();
 		}
 	}
 	

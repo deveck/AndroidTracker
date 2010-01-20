@@ -9,12 +9,9 @@ import org.cw.dataitems.TrackFile;
 import org.cw.dataitems.TrackInformation;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 

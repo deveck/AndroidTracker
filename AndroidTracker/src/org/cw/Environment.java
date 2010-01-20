@@ -4,6 +4,7 @@ import org.cw.connection.CrossingWaysConnection;
 import org.cw.dataitems.TrackInformation;
 import org.cw.gps.DefaultGPSProvider;
 import org.cw.gps.ILocationProvider;
+import org.cw.gps.TrackRecorder;
 import org.cw.settings.SettingsEnvironment;
 import org.cw.utils.AlertBuilder;
 import android.content.Context;
@@ -70,4 +71,11 @@ public class Environment
 	private int _currentActivity = 0;
 	public void setCurrentActivity(int currentActivity){ _currentActivity = currentActivity; }
 	public int getCurrentActivity(){ return _currentActivity; }
+	
+	 /**
+	 * Updates the gps coordinates for the gpx file :-)
+	 */
+	private TrackRecorder _trackRecorder = null;
+	public TrackRecorder getTrackRecorder(){ return _trackRecorder; }
+	public void CreateTrackRecorder(){ _trackRecorder = new TrackRecorder(); }
 }

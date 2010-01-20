@@ -57,6 +57,11 @@ public class DefaultGPSProvider implements ILocationProvider, IGpsRecorder
 		_statusReceivers.add(statusReceiver);
 	}
 	
+	public void RemoveGpsStatusReceiver(IGpsStatusReceiver statusReceiver)
+	{
+		_statusReceivers.remove(statusReceiver);
+	}
+	
 	@Override
 	public void AddLocation(LocationIdentifier newLocation) 
 	{		

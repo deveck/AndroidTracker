@@ -11,15 +11,12 @@ import org.cw.dataitems.TrackFile;
 import org.cw.dataitems.TrackInformation;
 import org.cw.utils.AlertBuilder;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class TrackListActivity extends MainActivity {
@@ -78,7 +75,6 @@ public class TrackListActivity extends MainActivity {
 	private Button _buttonLoad;
 	private Button _buttonUpLoad;
 	private Button _buttonDelete;
-	private Button _buttonCancel;
 
 	/**
 	 * Stores all the available Tracks and switches view mode 
@@ -261,22 +257,6 @@ public class TrackListActivity extends MainActivity {
 		}
 	}
 	
-    private void ButtonSettings_Clicked()
-    {
-    	if(IsActionPossible() == false)
-			return;
-    	
-    	startActivity(new Intent(this, SettingsActivity.class));
-    }
-    
-    private void ButtonRecord_Clicked()
-    {
-    	if(IsActionPossible() == false)
-			return;
-    	
-		setResult(ActivityConstants.RES_NOTHINGTODO);
-		finish();
-	}   	
 	
 	/** After warning, deletes the selected Track  from disk */
 	private void ButtonDelete_Clicked()

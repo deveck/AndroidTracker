@@ -2,7 +2,6 @@ package org.cw;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,27 +66,18 @@ public abstract class MainActivity extends Activity {
 			setResult(ActivityConstants.START_TRACKSCREEN);
 			finish();
 		}
-		//_mainView.removeAllViews();
-		//_mainView.addView(_inflater.inflate(R.layout.settings, null));
-	//	startActivity(new Intent(this,SettingsActivity.class));
-		//_inflater.inflate(R.layout.settings, _mainView);
-			
-		}
+
+	}
+
 	protected void onButtonRecord_clicked() {
 		if(Environment.Instance().getCurrentActivity() == ActivityConstants.START_MAINSCREEN);
 		else{
 			setResult(ActivityConstants.START_MAINSCREEN);
 			finish();
 		}
-		//_mainView.removeAllViews();
-		//_mainView.addView(_inflater.inflate(R.layout.settings, null));
-	//	startActivity(new Intent(this,SettingsActivity.class));
-		//_inflater.inflate(R.layout.settings, _mainView);
-			
-		}
+	}
 	
 	protected final void setViewContent(int activityChoose) {
-		//_mainView = (LinearLayout) findViewById(R.id.mainLayout);
 		Environment.Instance().setCurrentActivity(activityChoose);
 		_mainView.removeAllViews();
 		switch(activityChoose){
@@ -102,11 +92,4 @@ public abstract class MainActivity extends Activity {
 			break;
 		}
 	}
-	
-/*	protected final void setCurrentActivity(int currentActivity) {
-		_thisActivity = currentActivity;
-		Environment.Instance().setCurrentActivity(currentActivity); 
-	}*/
-	
-	
 }

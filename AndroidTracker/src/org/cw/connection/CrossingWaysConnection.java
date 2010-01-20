@@ -486,7 +486,7 @@ public class CrossingWaysConnection extends AsyncTask<Void, CallbackInfo, Void>
 				 */				
 				
 				long millisSinceLastLowPriorityExecution = (System.nanoTime() - lastLowPriorityExecution) / 1000;
-				long millisLowPriorityCommitInterval =  Environment.Instance().Settings().getLiveTrackerCommitInterval() * 1000;
+				long millisLowPriorityCommitInterval =  Environment.Instance().Settings().getLiveTrackerCommitInterval();
 				try
 				{
 					_requestLock.lock();
@@ -553,6 +553,9 @@ public class CrossingWaysConnection extends AsyncTask<Void, CallbackInfo, Void>
 					if(isLowPriorityRequest)
 						lastLowPriorityExecution = System.nanoTime();
 				}
+				
+				if(myRequest == null)
+					lastLowPriorityExecution = System.nanoTime();
 			}
 		}
 		catch(InterruptedException e)

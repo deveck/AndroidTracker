@@ -1,15 +1,8 @@
 package org.cw;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-
 import org.cw.gps.IGpsStatusReceiver;
-import org.cw.gps.LiveTrackingUpdater;
 import org.cw.gps.LocationIdentifier;
-import org.cw.gps.TrackRecorder;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -56,10 +49,8 @@ public class TrackerApp extends MainActivity implements IGpsStatusReceiver, ICal
 	private ImageButton _buttonPauseRecording;
 	private ImageButton _buttonStopRecording;
 	
-	private ImageButton _manageTracks;
-	
-	
 	private ToggleButton _toggleLiveTracker;
+	
 	private TextView _labelLatitudeDegree;
 	private TextView _labelLatitudeMinutes;
 	private TextView _labelLatitudeSeconds;
@@ -71,10 +62,7 @@ public class TrackerApp extends MainActivity implements IGpsStatusReceiver, ICal
 	private TextView _labelDuration;
 	private TextView _labelDistance;
 	
-	/**
-	 * Updates the gps coordinates for the gpx file :-)
-	 */
-	private TrackRecorder _trackRecorder = null;
+	
 
 	/** 
 	 * Timer to update the ui regulary
@@ -86,99 +74,70 @@ public class TrackerApp extends MainActivity implements IGpsStatusReceiver, ICal
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setViewContent(ActivityConstants.START_MAINSCREEN);
-//        _trackRecorder = new TrackRecorder();
-//        
-//        Environment.Instance().CreateSettings(this);
-//        Environment.Instance().CreateAlertBuilderInstance(this);
-//        Environment.Instance().CreateDefaultGPSProvider(this);
-//        Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(this);
-//        Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(new LiveTrackingUpdater());
-//        Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(_trackRecorder);
-//        
-      //  setContentView(R.layout.main);        
-//
-//        _timer = new UiTimer(this);
-//        _timer.setInterval(200);
-//        _timer.setEnabled(true);
-//        _timer.execute();
-//        
-//        _toggleLiveTracker = (ToggleButton)findViewById(R.id.buttonStartLiveTracking);
-//        _labelLatitudeDegree = (TextView)findViewById(R.id.labelLatitudeDegree);
-//        _labelLatitudeMinutes = (TextView)findViewById(R.id.labelLatitudeMinutes);
-//        _labelLatitudeSeconds = (TextView)findViewById(R.id.labelLatitudeSeconds);
-//        _labelLongitudeDegree = (TextView)findViewById(R.id.labelLongitudeDegree);
-//        _labelLongitudeMinutes = (TextView)findViewById(R.id.labelLongitudeMinutes);
-//        _labelLongitudeSeconds = (TextView)findViewById(R.id.labelLongitudeSeconds);
-//        _labelAltitude = (TextView)findViewById(R.id.labelAltitude);
-//        _labelSpeed = (TextView)findViewById(R.id.labelSpeed);
-//        _labelDuration = (TextView)findViewById(R.id.labelDuration);
-//        _labelDistance = (TextView)findViewById(R.id.labelDistance);
-//        
+       
+        Environment.Instance().GPSProviderInstance().AddGpsStatusReceiver(this);
+
+        _timer = new UiTimer(this);
+        _timer.setInterval(200);
+        _timer.setEnabled(true);
+        _timer.execute();
+
+        _toggleLiveTracker = (ToggleButton)findViewById(R.id.buttonStartLiveTracking);
+        _labelLatitudeDegree = (TextView)findViewById(R.id.labelLatitudeDegree);
+        _labelLatitudeMinutes = (TextView)findViewById(R.id.labelLatitudeMinutes);
+        _labelLatitudeSeconds = (TextView)findViewById(R.id.labelLatitudeSeconds);
+        _labelLongitudeDegree = (TextView)findViewById(R.id.labelLongitudeDegree);
+        _labelLongitudeMinutes = (TextView)findViewById(R.id.labelLongitudeMinutes);
+        _labelLongitudeSeconds = (TextView)findViewById(R.id.labelLongitudeSeconds);
+        _labelAltitude = (TextView)findViewById(R.id.labelAltitude);
+        _labelSpeed = (TextView)findViewById(R.id.labelSpeed);
+        _labelDuration = (TextView)findViewById(R.id.labelDuration);
+        _labelDistance = (TextView)findViewById(R.id.labelDistance);
+        
 
         _buttonStartRecording = (ImageButton)findViewById(R.id.buttonStartRecording);
-        _buttonStartRecording.setOnClickListener(new OnClickListener() {
-			
+        _buttonStartRecording.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				ButtonStartRecording_Clicked();				
 			}
 		});
 
-//        _manageTracks = (ImageButton)findViewById(R.id.buttonTracks);
-//        
-//        _buttonPauseRecording = (ImageButton)findViewById(R.id.buttonPauseRecording);
-//        _buttonStopRecording = (ImageButton)findViewById(R.id.buttonStopRecording);
-//        
-//        _manageTracks.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				ButtonTracks_Clicked();
-//			}
-//		});
-//        
-//        ((ImageButton)findViewById(R.id.buttonSettings)).setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				ButtonSettings_Clicked();
-//			}
-//		});
-//        
-//        _toggleLiveTracker.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-//			
-//			@Override
-//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//				Environment.Instance().Settings().setLiveTrackerEnabled(isChecked);			
-//			}
-//		});
-//        
-//        
-//        _buttonPauseRecording.setOnClickListener(new OnClickListener() {			
-//			@Override
-//			public void onClick(View v) {
-//				ButtonPauseRecording_Clicked();
-//			}
-//		});
-//        
-//        _buttonStopRecording.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				ButtonStopRecording_Clicked();				
-//			}
-//		});
+        
+        _buttonPauseRecording = (ImageButton)findViewById(R.id.buttonPauseRecording);
+        _buttonStopRecording = (ImageButton)findViewById(R.id.buttonStopRecording);
+               
+        
+        _toggleLiveTracker.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				Environment.Instance().Settings().setLiveTrackerEnabled(isChecked);			
+			}
+		});
+        
+        
+        _buttonPauseRecording.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				ButtonPauseRecording_Clicked();
+			}
+		});
+        
+        _buttonStopRecording.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				ButtonStopRecording_Clicked();				
+			}
+		});
     }
     
-    private void ButtonTracks_Clicked()
-    {
-    	startActivityForResult(new Intent(this, TrackListActivity.class), ActivityConstants.REQ_TRACKMANAGEMENT);
-	}
-        
-    private void ButtonSettings_Clicked()
-    {
-    	startActivity(new Intent(this, SettingsActivity.class));
+    @Override
+    protected void onDestroy() {
+    	super.onDestroy();
+    	Environment.Instance().GPSProviderInstance().RemoveGpsStatusReceiver(this);
     }
-       
-   
+    
     private void ButtonStartRecording_Clicked()
     {   			
     	if(Environment.Instance().getCurrentTrack() == null)
@@ -191,14 +150,14 @@ public class TrackerApp extends MainActivity implements IGpsStatusReceiver, ICal
     {
     	SetRecordingUiStyle(RecordingUiEnum.PausedRecording);
     	Environment.Instance().getCurrentTrack().getTrackTime().Pause();
-    	_trackRecorder.setEnabled(false);
+    	Environment.Instance().getTrackRecorder().setEnabled(false);
     }
     
     private void ButtonStopRecording_Clicked()
     {
     	SetRecordingUiStyle(RecordingUiEnum.NotRecording);
     	Environment.Instance().getCurrentTrack().getTrackTime().Start();
-    	_trackRecorder.setEnabled(false);
+    	Environment.Instance().getTrackRecorder().setEnabled(false);
     	Environment.Instance().getCurrentTrack().save();
     	Environment.Instance().registerTrack(null);
     }
@@ -211,7 +170,7 @@ public class TrackerApp extends MainActivity implements IGpsStatusReceiver, ICal
     {
     	SetRecordingUiStyle(RecordingUiEnum.Recording);
     	Environment.Instance().getCurrentTrack().getTrackTime().Start();
-    	_trackRecorder.setEnabled(true);
+    	Environment.Instance().getTrackRecorder().setEnabled(true);
     }
     
     /**
@@ -300,8 +259,7 @@ public class TrackerApp extends MainActivity implements IGpsStatusReceiver, ICal
 			hours = (int) Environment.Instance().getCurrentTrack().getTrackTime().getDisplayHours();
 			minutes = (int) Environment.Instance().getCurrentTrack().getTrackTime().getDisplayMinutes();
 			seconds = (int) Environment.Instance().getCurrentTrack().getTrackTime().getDisplaySeconds();
-			distance = (int) Environment.Instance().getCurrentTrack().getStatistics().getDistance();
-			
+			distance = (int) Environment.Instance().getCurrentTrack().getStatistics().getDistance();			
 		}
 		
 		_labelDuration.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));

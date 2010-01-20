@@ -1,5 +1,6 @@
 package org.cw.gps;
 
+
 /**
  * Implemented by classes that provide GPS data to the application
  * 
@@ -11,6 +12,8 @@ public interface ILocationProvider
 	LocationIdentifier GetLastKnownLocation();
 	
 	void AddGpsStatusReceiver(IGpsStatusReceiver statusReceiver);
+
+	void RemoveGpsStatusReceiver(IGpsStatusReceiver statusReceiver);
 }
 
 

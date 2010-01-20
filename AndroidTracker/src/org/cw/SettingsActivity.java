@@ -1,7 +1,5 @@
 package org.cw;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -25,9 +23,7 @@ public class SettingsActivity extends MainActivity
 	{
 		super.onCreate(savedInstanceState);
 		super.setViewContent(ActivityConstants.START_SETTINGSCREEN);
-		
-//		setContentView(R.layout.settings);
-//		
+
 		_textUsername = (EditText)findViewById(R.id.textUsername);
 		_textPassword = (EditText)findViewById(R.id.textPassword);
 		_textCommitInterval = (EditText)findViewById(R.id.textCommitInterval);
@@ -38,9 +34,8 @@ public class SettingsActivity extends MainActivity
 		_textUsername.setText(Environment.Instance().Settings().getUsername(""));
         _textPassword.setText(Environment.Instance().Settings().getPassword(""));      
         _textCommitInterval.setText(new Integer((Environment.Instance().Settings().getLiveTrackerCommitInterval()/1000)).toString());
-//        
         this.SetVerifiedState(true);
-//        
+        
         _textUsername.setOnKeyListener(new OnKeyListener() {			
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -56,21 +51,6 @@ public class SettingsActivity extends MainActivity
 				OnSave_Clicked();				
 			}
 		});
-////        
-//        ((ImageButton)findViewById(R.id.buttonRecord)).setOnClickListener(new OnClickListener() {
-//			@Override
-//		public void onClick(View v) {
-//				ButtonRecord_Clicked();
-//			}
-//		});
-////        
-////        ((ImageButton)findViewById(R.id.buttonTracks)).setOnClickListener(new OnClickListener() {
-////			@Override
-////			public void onClick(View v) {
-////				ButtonTracks_Clicked();
-////			}
-////		});             
-//        
         _buttonVerifyCredentials.setOnClickListener(new OnClickListener() {
 			
 		@Override
@@ -101,16 +81,6 @@ public class SettingsActivity extends MainActivity
 		}
 	}
 	
-
-//    private void ButtonRecord_Clicked()
-//    {
-//		setResult(ActivityConstants.RES_NOTHINGTODO);
-//		finish();
-//	}    
-//    private void ButtonTracks_Clicked()
-//    {
-//    	startActivityForResult(new Intent(this, TrackListActivity.class), ActivityConstants.REQ_TRACKMANAGEMENT);
-//	}    
 	
 	/** Called on save button click,
 	 * Save all settings here, if they are verified
@@ -130,7 +100,6 @@ public class SettingsActivity extends MainActivity
 		catch(NumberFormatException e)
 		{
 		}
-		//finish();
 	}
 	
 	private void OnVerifyCredentials_Clicked()

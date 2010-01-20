@@ -252,9 +252,10 @@ public class TrackListActivity extends MainActivity {
 		else
 		{
 			Environment.Instance().registerTrack(trackInformation);
-			//Environment.Instance().setLastRecordingState(RecordingUiEnum.PausedRecording);
-//			setResult(ActivityConstants.RES_OK);
-//			finish();
+			Environment.Instance().getTrackRecorder().setEnabled(true);
+			Environment.Instance().setLastRecordingState(RecordingUiEnum.Recording);
+			trackInformation.getTrackTime().Start();
+			new AlertBuilder(this).ShowInfoBox("Track loaded sucessful", "", "Close");
 		}
 	}
 	

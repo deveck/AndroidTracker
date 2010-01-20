@@ -108,7 +108,7 @@ public class NewTrackActivity extends Activity {
 		Environment.Instance().registerTrack(
 				new TrackInformation(trackFile,
 						_textTracksummary.getText().toString()));
-		
+		Environment.Instance().getTrackRecorder().setEnabled(true);
 		setResult(ActivityConstants.RES_OK);
 		finish();
 	}

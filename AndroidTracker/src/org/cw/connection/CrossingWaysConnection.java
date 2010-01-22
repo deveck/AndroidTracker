@@ -54,8 +54,8 @@ public class CrossingWaysConnection extends AsyncTask<Void, CallbackInfo, Void>
 	/**
 	 * Url of the ASP Webservice
 	 */
-	//private String _serviceUrl = "http://www.crossingways.com/services/livetracking.asmx";
-	private String _serviceUrl = "http://crossingways.graz.interad.at:8080/services/livetracking.asmx";
+	private String _serviceUrl = "http://www.crossingways.com/services/livetracking.asmx";
+	//private String _serviceUrl = "http://crossingways.graz.interad.at:8080/services/livetracking.asmx";
 	
 	/**
 	 * Http Transport layer

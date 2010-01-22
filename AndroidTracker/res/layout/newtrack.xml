@@ -7,7 +7,7 @@
 	android:background="@drawable/background"
 	android:isScrollContainer="true">
 	
-	
+	 
 	<TextView android:id="@+id/labelTrackname"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
